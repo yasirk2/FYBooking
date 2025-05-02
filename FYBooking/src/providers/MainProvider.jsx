@@ -1,4 +1,3 @@
-import { useState } from "react";
 import MainContext from "./contexts/MainContext";
 
 const MainProvider = ({ children }) => {
@@ -6,7 +5,6 @@ const MainProvider = ({ children }) => {
   return (
     <MainContext.Provider
       value={{
-
       }}
     >
       {children}
