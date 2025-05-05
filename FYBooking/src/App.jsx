@@ -1,7 +1,8 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainProvider from "./providers/MainProvider";
 import StartPage from "./pages/StartPage";
+import RoomPage from "./pages/RoomPage";
 import MainPage from "./pages/MainPage";
 import AdminPage from "./pages/AdminPage";
 import UserPage from "./pages/UserPage";
@@ -11,22 +12,11 @@ function App() {
     <MainProvider>
       <BrowserRouter>
         <Routes>
-          <Route
-          path="/"
-          element={<StartPage/>}
-          />
-          <Route
-          path="/main"
-          element={<MainPage/>}
-          />
-          <Route
-          path="/user"
-          element={<UserPage/>}
-          />
-          <Route
-          path="/admin"
-          element={<AdminPage/>}
-          />
+          <Route path="/" element={<StartPage />} />
+          <Route path="/room" element={<RoomPage />} />
+          <Route path="/main" element={<MainPage />} />
+          <Route path="/user" element={<UserPage />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </BrowserRouter>
     </MainProvider>

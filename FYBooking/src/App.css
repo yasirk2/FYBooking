@@ -3,3 +3,8 @@
   padding: 0px;
   box-sizing: border-box;
 }
+
+.page-title {
+  display: flex;
+  justify-content: center;
+}

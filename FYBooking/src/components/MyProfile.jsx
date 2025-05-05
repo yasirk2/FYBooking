@@ -1,7 +1,17 @@
+import { useContext } from "react";
+import MainContext from "../providers/contexts/MainContext";
+
 const MyProfile = () => {
+  const { setUserPageDisplay } = useContext(MainContext);
+
+  const goBack = () => {
+    setUserPageDisplay(null);
+  };
+  
   return (
     <>
-      <h1>MyProfile</h1>
+      <p>MyProfile</p>
+      <button onClick={goBack}>Back</button>
     </>
   );
 };

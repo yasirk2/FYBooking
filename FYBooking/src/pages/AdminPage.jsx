@@ -1,9 +1,52 @@
+import { useContext } from "react";
+import "../styles/AdminPageStyle.css";
+import { useNavigate } from "react-router-dom";
+import MainContext from "../providers/contexts/MainContext";
+import UsersAdmin from "../components/UsersAdmin";
+import RoomsAdmin from "../components/RoomsAdmin";
+
 const AdminPage = () => {
+  const navigate = useNavigate();
+  const { adminPageDisplay, setAdminPageDisplay } = useContext(MainContext);
+
+  const backToUserPage = () => {
+    navigate("/user");
+  };
+
   return (
     <>
-      <h1>AdminPage</h1>
-      <button>Användare</button>
-      <button>Rum</button>
+      {adminPageDisplay === "users" ? (
+        <>
+          <h1 className="page-title">Users</h1>
+          <UsersAdmin/>
+        </>
+      ) : adminPageDisplay === "rooms" ? (
+        <>
+          <h1 className="page-title">Rooms</h1>
+          <RoomsAdmin/>
+        </>
+      ) : (
+        <>
+          <h1 className="page-title">AdminPage</h1>
+          <div className="admin-menu">
+            <button
+              className="admin-action-button"
+              onClick={() => setAdminPageDisplay("users")}
+            >
+              Users
+            </button>
+            <button
+              className="admin-action-button"
+              onClick={() => setAdminPageDisplay("rooms")}
+            >
+              Room
+            </button>
+            <button className="admin-action-button" onClick={backToUserPage}>
+              Back
+            </button>
+          </div>
+        </>
+      )}
     </>
   );
 };

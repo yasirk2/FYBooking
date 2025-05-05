@@ -1,0 +1,31 @@
+.room-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.room-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height: 40px;
+  border: black solid 1px;
+  border-radius: 20px;
+}
+
+.page-footer {
+  display: flex;
+  position: fixed;
+  flex-direction: row-reverse;
+  align-items: center;
+  background-color: lightgrey;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+}
+
+.user-button {
+  margin-right: 10px;
+}

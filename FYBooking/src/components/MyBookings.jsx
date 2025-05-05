@@ -1,7 +1,17 @@
+import { useContext } from "react";
+import MainContext from "../providers/contexts/MainContext";
+
 const MyBookings = () => {
+  const { setUserPageDisplay } = useContext(MainContext);
+
+  const goBack = () => {
+    setUserPageDisplay(null);
+  };
+
   return (
     <>
-      <h1>MyBookings</h1>
+      <p>MyBookings</p>
+      <button onClick={goBack}>Back</button>
     </>
   );
 };

@@ -1,8 +1,18 @@
+import { useNavigate } from "react-router-dom";
+
 const UserButton = () => {
+  const navigate = useNavigate();
+
+  const navigateToUserPage = () => {
+    navigate("/user");
+  };
+
   return (
-    <>
-      <h1>UserButton</h1>
-    </>
+    <footer className="page-footer">
+      <p className="user-button" onClick={navigateToUserPage}>
+        UserButton
+      </p>
+    </footer>
   );
 };
 

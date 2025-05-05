@@ -1,11 +1,59 @@
+import { useNavigate } from "react-router-dom";
+import "../styles/UserPageStyle.css";
+import MainContext from "../providers/contexts/MainContext";
+import { useContext } from "react";
+import MyProfile from "../components/MyProfile";
+import MyBookings from "../components/MyBookings";
+
 const UserPage = () => {
+  const navigate = useNavigate();
+  const { userPageDisplay, setUserPageDisplay } = useContext(MainContext);
+
+  const navigateToAdminPage = () => {
+    navigate("/admin");
+  };
+
+  const logout = () => {
+    navigate("/");
+  };
+
   return (
     <>
-      <h1>UserPage</h1>
-      <button>Mina bokningar</button>
-      <button>Min profil</button>
-      <button>Admin panel</button>
-      <button>Logga Ut</button>
+      {userPageDisplay === "profile" ? (
+        <>
+          <h1 className="page-title">My Profile</h1>
+          <MyProfile/>
+        </>
+      ) : userPageDisplay === "booking" ? (
+        <>
+          <h1 className="page-title">My Bookings</h1>
+          <MyBookings/>
+        </>
+      ) : (
+        <>
+          <h1 className="page-title">UserPage</h1>
+          <div className="user-menu">
+            <button
+              className="user-action-button"
+              onClick={() => setUserPageDisplay("profile")}
+            >
+              My profile
+            </button>
+            <button
+              className="user-action-button"
+              onClick={() => setUserPageDisplay("booking")}
+            >
+              My bookings
+            </button>
+            <button className="user-action-button" onClick={navigateToAdminPage}>
+              Admin panel
+            </button>
+            <button className="user-action-button" onClick={logout}>
+              Logout
+            </button>
+          </div>
+        </>
+      )}
     </>
   );
 };
