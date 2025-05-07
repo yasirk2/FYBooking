@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import MainContext from "../providers/contexts/MainContext";
-import { addUsers } from "../data/db";
 
 const RoomsAdmin = () => {
   const [formVisibility, setFormVisibility] = useState(false);

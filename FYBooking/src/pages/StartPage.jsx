@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "../styles/StartPageStyle.css";
+import { addUsers, getUsers } from "../data/db";
+import { useEffect } from "react";
 
 const StartPage = () => {
   const navigate = useNavigate();
@@ -8,6 +10,22 @@ const StartPage = () => {
     e.preventDefault();
     navigate("/room");
   };
+
+  // Creates the first admin account
+  useEffect(() => {
+    const storedUsers = getUsers()
+
+    if(storedUsers.length === 0) {
+      const adminUser = {
+        username: "admin",
+        password: "admin",
+        role: "admin",
+        organization: "FYBooking",
+        user_id: 1,
+      }
+      addUsers(adminUser)
+    }
+  }, [])
 
   return (
     <>
