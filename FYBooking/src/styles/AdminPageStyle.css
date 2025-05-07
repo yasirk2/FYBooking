@@ -1,0 +1,15 @@
+.admin-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin-action-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height: 40px;
+  border: black solid 1px;
+  border-radius: 20px;
+}
