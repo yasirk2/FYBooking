@@ -1,10 +1,12 @@
+import MainContext from "../providers/contexts/MainContext";
 import "../styles/MainPageStyle.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 const Schedule = () => {
   const [days, setDays] = useState([]);
   const [months, setMonths] = useState([]);
   const [weekDays, setWeekDays] = useState(0);
+  const { selectedDate, setSelectedDate } = useContext(MainContext);
 
   // getCalender handles the calender and weekDays adds or subracts the amount of days is should show
   const getCalendar = (weekDays) => {
@@ -16,9 +18,12 @@ const Schedule = () => {
       today.setDate(today.getDate() + i + weekDays);
       const dateNumber = today.getDate();
       const dateName = today.toLocaleDateString("en-US", { weekday: "short" });
+      const dayFullName = today.toLocaleDateString("en-US", {
+        weekday: "long",
+      });
       const month = today.toLocaleDateString("en-US", { month: "long" });
 
-      dayList.push({ dayName: dateName, date: dateNumber });
+      dayList.push({ dayName: dateName, date: dateNumber, dayFullName, month });
 
       monthList.push(month);
     }
@@ -42,6 +47,18 @@ const Schedule = () => {
     getCalendar(weekDays);
   }, [weekDays]);
 
+  useEffect(() => {
+    if (days.length > 1) {
+      setSelectedDate((prev) => ({
+        ...prev,
+        dayName: days[0].dayName,
+        date: days[0].date,
+        dayFullName: days[0].dayFullName,
+        month: days[0].month,
+      }));
+    }
+  }, [days]);
+
   return (
     <div className="upper-main-page">
       <div className="month-div">
@@ -60,7 +77,21 @@ const Schedule = () => {
       <div className="days-div">
         {days.length > 0 &&
           days.map((day, index) => (
-            <div className="day-date-div" key={index}>
+            <div
+              onClick={() => {
+                setSelectedDate((prev) => ({
+                  ...prev,
+                  dayName: day.dayName,
+                  date: day.date,
+                  dayFullName: day.dayFullName,
+                  month: day.month,
+                }));
+              }}
+              className={`day-date-div ${
+                selectedDate.date === day.date ? "selected-date" : ""
+              }`}
+              key={index}
+            >
               <p className="day-name-p">{day.dayName}</p>
               <p>{day.date}</p>
             </div>

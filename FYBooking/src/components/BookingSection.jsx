@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "../styles/MainPageStyle.css";
+import MainContext from "../providers/contexts/MainContext";
 
 const BookingSection = () => {
+  const { selectedDate } = useContext(MainContext);
   const [timeSlots, setTimeSlots] = useState(null);
   const startTime = "08:00";
   const endTime = "16:00";

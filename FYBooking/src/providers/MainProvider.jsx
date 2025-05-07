@@ -8,6 +8,7 @@ const MainProvider = ({ children }) => {
     const storedPage = sessionStorage.getItem("previousPage");
     return storedPage || null;
   });
+  const [selectedDate, setSelectedDate] = useState({});
 
   // Sparar previousPage i sessionStorage ifall en refresh utförs
   useEffect(() => {
@@ -25,6 +26,8 @@ const MainProvider = ({ children }) => {
         setAdminPageDisplay,
         previousPage,
         setPreviousPage,
+        selectedDate,
+        setSelectedDate,
       }}
     >
       {children}

@@ -41,11 +41,18 @@
   align-items: center;
   flex-direction: column;
   padding: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   border-bottom: solid 1px black;
 }
 
 .day-name-p {
   padding-bottom: 5px;
+}
+
+.selected-date {
+  border: solid 1px black;
+  border-radius: 5px;
 }
 
 .week-div {
