@@ -9,7 +9,7 @@ const MainProvider = ({ children }) => {
     return storedPage || null;
   });
 
-  // Uppdaterar previousPage till den senaste sidan
+  // Sparar previousPage i sessionStorage ifall en refresh utförs
   useEffect(() => {
     if (previousPage) {
       sessionStorage.setItem("previousPage", previousPage);
