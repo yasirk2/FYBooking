@@ -19,7 +19,7 @@ const BookingSection = () => {
     const startTotalMinutes = startHour * 60 + startMin;
     const endTotalMinutes = endHour * 60 + endMin;
 
-    //
+    //uses starttime, endtime and intervall to generate the right amount of timeslots
     for (
       let minutes = startTotalMinutes;
       minutes <= endTotalMinutes;

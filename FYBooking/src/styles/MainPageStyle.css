@@ -3,6 +3,9 @@
 }
 .upper-main-page {
   min-height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .lower-main-page {
@@ -14,6 +17,12 @@
 
 .month-div {
   text-align: center;
+}
+
+.month-h2 {
+  font-weight: normal;
+  border-bottom: solid 1px black;
+  display: inline-block;
 }
 
 .dual-months {
@@ -31,11 +40,23 @@
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
+  padding: 10px;
+  border-bottom: solid 1px black;
+}
+
+.day-name-p {
+  padding-bottom: 5px;
 }
 
 .week-div {
   display: flex;
   justify-content: space-around;
+}
+
+.week-btn {
+  border: none;
+  background-color: white;
+  padding: 5px;
 }
 
 .booking-slot {

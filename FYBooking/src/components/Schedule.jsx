@@ -48,26 +48,48 @@ const Schedule = () => {
         {months.length === 2 ? (
           <div className="dual-months">
             {months.map((month, index) => (
-              <h3 key={index}>{month}</h3>
+              <h2 className="month-h2" key={index}>
+                {month}
+              </h2>
             ))}
           </div>
         ) : (
-          <h3>{months}</h3>
+          <h2 className="month-h2">{months}</h2>
         )}
       </div>
       <div className="days-div">
         {days.length > 0 &&
           days.map((day, index) => (
             <div className="day-date-div" key={index}>
-              <p>{day.dayName}</p>
+              <p className="day-name-p">{day.dayName}</p>
               <p>{day.date}</p>
             </div>
           ))}
       </div>
       <div className="week-div">
-        <button onClick={() => setWeekDays((days) => days - 7)}>back</button>
-        <button onClick={() => setWeekDays(0)}>This week</button>
-        <button onClick={() => setWeekDays((days) => days + 7)}>next</button>
+        <button
+          className="week-btn"
+          onClick={() => setWeekDays((days) => days - 7)}
+        >
+          <img src="/Arrowback.svg" alt="arrow back" className="arrow-icon" />
+        </button>
+        <button
+          style={{ borderBottom: "solid 1px black" }}
+          className="week-btn"
+          onClick={() => setWeekDays(0)}
+        >
+          This week
+        </button>
+        <button
+          className="week-btn"
+          onClick={() => setWeekDays((days) => days + 7)}
+        >
+          <img
+            src="/Arrowforward.svg"
+            alt="arrow forward"
+            className="arrow-icon"
+          />
+        </button>
       </div>
     </div>
   );
