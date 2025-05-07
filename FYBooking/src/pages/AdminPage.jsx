@@ -27,7 +27,7 @@ const AdminPage = () => {
         </>
       ) : (
         <>
-          <h1 className="page-title">AdminPage</h1>
+          <h1 className="page-title">Admin Panel</h1>
           <div className="admin-menu">
             <button
               className="admin-action-button"

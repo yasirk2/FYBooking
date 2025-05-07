@@ -2,8 +2,9 @@ import MainContext from "./contexts/MainContext";
 import { useState } from "react";
 
 const MainProvider = ({ children }) => {
-  const [userPageDisplay, setUserPageDisplay] = useState(null)
-  const [adminPageDisplay, setAdminPageDisplay] = useState(null)
+  const [userPageDisplay, setUserPageDisplay] = useState(null);
+  const [adminPageDisplay, setAdminPageDisplay] = useState(null);
+  const [previousPage, setPreviousPage] = useState(null);
 
   return (
     <MainContext.Provider
@@ -12,6 +13,8 @@ const MainProvider = ({ children }) => {
         setUserPageDisplay,
         adminPageDisplay,
         setAdminPageDisplay,
+        previousPage,
+        setPreviousPage,
       }}
     >
       {children}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-
 import "../styles/MainPageStyle.css";
+import UserButton from "../components/UserButton";
 
 const MainPage = () => {
   const [days, setDays] = useState([]);
@@ -40,29 +40,32 @@ const MainPage = () => {
     console.log(months.length);
   }, [months]);
   return (
-    <div>
-      <div className="month-div">
-        {months.length === 2 ? (
-          <div className="dual-months">
-            {months.map((month, index) => (
-              <h3 key={index}>{month}</h3>
-            ))}
-          </div>
-        ) : (
-          <h3>{months}</h3>
-        )}
-      </div>
-      <div className="days-div">
-        {days.length > 0 &&
-          days.map((day, index) => (
-            <div className="day-date-div" key={index}>
-              <p>{day.dayName}</p>
-              <p>{day.date}</p>
+    <>
+      <div>
+        <div className="month-div">
+          {months.length === 2 ? (
+            <div className="dual-months">
+              {months.map((month, index) => (
+                <h3 key={index}>{month}</h3>
+              ))}
             </div>
-          ))}
+          ) : (
+            <h3>{months}</h3>
+          )}
+        </div>
+        <div className="days-div">
+          {days.length > 0 &&
+            days.map((day, index) => (
+              <div className="day-date-div" key={index}>
+                <p>{day.dayName}</p>
+                <p>{day.date}</p>
+              </div>
+            ))}
+        </div>
+        <div className="week-div">Week</div>
       </div>
-      <div className="week-div">Week</div>
-    </div>
+      <UserButton originalPage={"main"}/>
+    </>
   );
 };
 

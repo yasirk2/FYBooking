@@ -7,7 +7,7 @@ import MyBookings from "../components/MyBookings";
 
 const UserPage = () => {
   const navigate = useNavigate();
-  const { userPageDisplay, setUserPageDisplay } = useContext(MainContext);
+  const { userPageDisplay, setUserPageDisplay, previousPage } = useContext(MainContext);
 
   const navigateToAdminPage = () => {
     navigate("/admin");
@@ -15,6 +15,10 @@ const UserPage = () => {
 
   const logout = () => {
     navigate("/");
+  };
+
+  const navigateToPreviousPage = () => {
+    navigate(`/${previousPage}`);
   };
 
   return (
@@ -31,7 +35,7 @@ const UserPage = () => {
         </>
       ) : (
         <>
-          <h1 className="page-title">UserPage</h1>
+          <h1 className="page-title">Username</h1>
           <div className="user-menu">
             <button
               className="user-action-button"
@@ -50,6 +54,9 @@ const UserPage = () => {
             </button>
             <button className="user-action-button" onClick={logout}>
               Logout
+            </button>
+            <button className="user-action-button" onClick={navigateToPreviousPage}>
+              Back
             </button>
           </div>
         </>
