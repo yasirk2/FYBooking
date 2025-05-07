@@ -4,6 +4,7 @@ import "../styles/RoomPageStyle.css";
 
 const RoomPage = () => {
   const navigate = useNavigate()
+  
   const navigateToMainPage = () => {
     navigate("/main")
   };
