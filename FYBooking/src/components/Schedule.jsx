@@ -6,13 +6,14 @@ const Schedule = () => {
   const [months, setMonths] = useState([]);
   const [weekDays, setWeekDays] = useState(0);
 
-  const getCalendar = (daysForward) => {
+  // getCalender handles the calender and weekDays adds or subracts the amount of days is should show
+  const getCalendar = (weekDays) => {
     const dayList = [];
     const monthList = [];
     const differentMonths = [];
     for (let i = 0; i < 7; i++) {
       const today = new Date();
-      today.setDate(today.getDate() + i + daysForward);
+      today.setDate(today.getDate() + i + weekDays);
       const dateNumber = today.getDate();
       const dateName = today.toLocaleDateString("en-US", { weekday: "short" });
       const month = today.toLocaleDateString("en-US", { month: "long" });
@@ -42,35 +43,33 @@ const Schedule = () => {
   }, [weekDays]);
 
   return (
-    <>
-      <div>
-        <div className="month-div">
-          {months.length === 2 ? (
-            <div className="dual-months">
-              {months.map((month, index) => (
-                <h3 key={index}>{month}</h3>
-              ))}
-            </div>
-          ) : (
-            <h3>{months}</h3>
-          )}
-        </div>
-        <div className="days-div">
-          {days.length > 0 &&
-            days.map((day, index) => (
-              <div className="day-date-div" key={index}>
-                <p>{day.dayName}</p>
-                <p>{day.date}</p>
-              </div>
+    <div className="upper-main-page">
+      <div className="month-div">
+        {months.length === 2 ? (
+          <div className="dual-months">
+            {months.map((month, index) => (
+              <h3 key={index}>{month}</h3>
             ))}
-        </div>
-        <div className="week-div">
-          <button onClick={() => setWeekDays((days) => days - 7)}>back</button>
-          <button onClick={() => setWeekDays(0)}>This week</button>
-          <button onClick={() => setWeekDays((days) => days + 7)}>next</button>
-        </div>
+          </div>
+        ) : (
+          <h3>{months}</h3>
+        )}
       </div>
-    </>
+      <div className="days-div">
+        {days.length > 0 &&
+          days.map((day, index) => (
+            <div className="day-date-div" key={index}>
+              <p>{day.dayName}</p>
+              <p>{day.date}</p>
+            </div>
+          ))}
+      </div>
+      <div className="week-div">
+        <button onClick={() => setWeekDays((days) => days - 7)}>back</button>
+        <button onClick={() => setWeekDays(0)}>This week</button>
+        <button onClick={() => setWeekDays((days) => days + 7)}>next</button>
+      </div>
+    </div>
   );
 };
 
