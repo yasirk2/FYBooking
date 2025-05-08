@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "../styles/StartPageStyle.css";
-import { addUsers, getUsers } from "../data/db";
+import { addNewObject, getSelectedItems } from "../data/db";
 import { useEffect } from "react";
 
 const StartPage = () => {
@@ -13,7 +13,7 @@ const StartPage = () => {
 
   // Creates the first admin account
   useEffect(() => {
-    const storedUsers = getUsers()
+    const storedUsers = getSelectedItems("users")
 
     if(storedUsers.length === 0) {
       const adminUser = {
@@ -23,7 +23,7 @@ const StartPage = () => {
         organization: "FYBooking",
         user_id: 1,
       }
-      addUsers(adminUser)
+      addNewObject("users", adminUser)
     }
   }, [])
 

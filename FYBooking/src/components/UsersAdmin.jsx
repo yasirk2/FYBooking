@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import MainContext from "../providers/contexts/MainContext";
-import { getUsers, addUsers, deleteUser } from "../data/db";
+import { getSelectedItems, addNewObject, deleteObject } from "../data/db";
 
 const UsersAdmin = () => {
   const [formVisibility, setFormVisibility] = useState(false);
@@ -10,7 +10,7 @@ const UsersAdmin = () => {
     role: "client",
   });
   const [userId, setUserId] = useState(0);
-  const [users, setUsers] = useState(getUsers());
+  const [users, setUsers] = useState(getSelectedItems("users"));
   const { setAdminPageDisplay } = useContext(MainContext);
 
   let tempOrg = "FYBooking";
@@ -42,8 +42,8 @@ const UsersAdmin = () => {
       user_id: userId,
     };
 
-    addUsers(newUser);
-    setUsers(getUsers());
+    addNewObject("users", newUser);
+    setUsers(getSelectedItems("users"));
 
     setNewUserData((prevData) => ({
       ...prevData,

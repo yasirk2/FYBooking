@@ -1,16 +1,16 @@
-// ======= users =======
+// ======= Simple API =======
 
-export const getUsers = () => {
-  return JSON.parse(sessionStorage.getItem("users")) || [];
+export const getSelectedItems = (selectedItem) => {
+  return JSON.parse(sessionStorage.getItem(selectedItem)) || [];
 }
 
-export const addUsers = (user) => {
-  const users = JSON.parse(sessionStorage.getItem("users")) || [];
-  users.push(user);
-  sessionStorage.setItem("users", JSON.stringify(users))
+export const addNewObject = (selectedItem, newObject) => {
+  const itemArray = JSON.parse(sessionStorage.getItem(selectedItem)) || [];
+  itemArray.push(newObject);
+  sessionStorage.setItem(selectedItem, JSON.stringify(itemArray))
 }
 
-export const deleteUser = (userId) => {
-  const updatedUsers = getUsers().filter((user) => user.user_id !== userId);
-  sessionStorage.setItem("users", JSON.stringify(updatedUsers))
+export const deleteObject = (selectedItem, objectIdName, objectId) => {
+  const updatedItemArray = getSelectedItems(selectedItem).filter((item) => item[objectIdName] !== objectId);
+  sessionStorage.setItem(selectedItem, JSON.stringify(updatedItemArray))
 }
