@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import MainContext from "../providers/contexts/MainContext";
 import { getSelectedItems, addNewObject, deleteObject } from "../data/db";
+import handleChange from "../utils/handleChange";
 
 const UsersAdmin = () => {
   const [formVisibility, setFormVisibility] = useState(false);
@@ -22,15 +23,6 @@ const UsersAdmin = () => {
       setUserId(maxId + 1);
     }
   }, [users]);
-
-  // Handles data changes in the form for new users data
-  const handleChange = (e, data) => {
-    const { name, value } = e.target;
-    data((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
 
   // Function that creates the new user
   const createUser = (e) => {
@@ -54,7 +46,10 @@ const UsersAdmin = () => {
   };
 
   // Function to remove a user
-  const removeUser = () => {};
+  const removeUser = (index) => {
+    deleteObject("users", "user_id", index);
+    setUsers(getSelectedItems("users"));
+  };
 
   const goBack = () => {
     setAdminPageDisplay(null);
@@ -120,7 +115,7 @@ const UsersAdmin = () => {
               <div key={index}>
                 <p>{user.user_id}</p>
                 <h3>{user.username}</h3>
-                <button>X</button>
+                <button onClick={() => removeUser(index)}>X</button>
               </div>
             );
           })}

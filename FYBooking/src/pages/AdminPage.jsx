@@ -39,7 +39,7 @@ const AdminPage = () => {
               className="admin-action-button"
               onClick={() => setAdminPageDisplay("rooms")}
             >
-              Room
+              Rooms
             </button>
             <button className="admin-action-button" onClick={backToUserPage}>
               Back
