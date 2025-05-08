@@ -3,7 +3,8 @@ import "../styles/MainPageStyle.css";
 import MainContext from "../providers/contexts/MainContext";
 
 const BookingSection = () => {
-  const { selectedDate } = useContext(MainContext);
+  const { selectedDate, setSelectedDateTime, setDateModuleVisibility } =
+    useContext(MainContext);
   const [timeSlots, setTimeSlots] = useState(null);
   const startTime = "08:00";
   const endTime = "16:00";
@@ -19,7 +20,7 @@ const BookingSection = () => {
 
     // The variables contains the total minutes from midnight/amount total time in minutes
     const startTotalMinutes = startHour * 60 + startMin;
-    const endTotalMinutes = endHour * 60 + endMin;
+    const endTotalMinutes = endHour * 60 + endMin + intervall;
 
     //uses starttime, endtime and intervall to generate the right amount of timeslots
     for (
@@ -36,21 +37,51 @@ const BookingSection = () => {
 
       timeSlot.push(formattedTimeSlots);
     }
-    setTimeSlots(timeSlot);
+
+    setTimeSlots([
+      {
+        date: selectedDate.date,
+        dayFullName: selectedDate.dayFullName,
+        dayName: selectedDate.dayName,
+        month: selectedDate.month,
+      },
+      timeSlot,
+    ]);
   };
 
   useEffect(() => {
     generateIntervall(startTime, endTime, intervall);
-  }, []);
+  }, [selectedDate]);
 
   return (
     <div className="lower-main-page">
       {timeSlots !== null &&
-        timeSlots.map((timeSlot, index) => (
-          <div className="booking-slot" key={index}>
-            <p>{timeSlot}</p>
-          </div>
-        ))}
+        timeSlots[1].map((timeSlot, index) => {
+          const endTime = timeSlots[1][index + 1];
+          if (index === timeSlots[1].length - 1) {
+            return null;
+          }
+          return (
+            <div
+              onClick={() => {
+                setSelectedDateTime((prev) => ({
+                  ...prev,
+                  date: selectedDate.date,
+                  dayFullName: selectedDate.dayFullName,
+                  dayName: selectedDate.dayName,
+                  month: selectedDate.month,
+                  startTime: timeSlot,
+                  endTime: endTime,
+                }));
+                setDateModuleVisibility(true);
+              }}
+              className="booking-slot"
+              key={index}
+            >
+              <p>{timeSlot}</p>
+            </div>
+          );
+        })}
     </div>
   );
 };

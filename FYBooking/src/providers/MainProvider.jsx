@@ -9,6 +9,9 @@ const MainProvider = ({ children }) => {
     return storedPage || null;
   });
   const [selectedDate, setSelectedDate] = useState({});
+  const [selectedDateTime, setSelectedDateTime] = useState({});
+  const [selectedRoom, setSelectedRoom] = useState("");
+  const [dateModuleVisibility, setDateModuleVisibility] = useState(false);
 
   // Sparar previousPage i sessionStorage ifall en refresh utförs
   useEffect(() => {
@@ -28,6 +31,12 @@ const MainProvider = ({ children }) => {
         setPreviousPage,
         selectedDate,
         setSelectedDate,
+        selectedDateTime,
+        setSelectedDateTime,
+        selectedRoom,
+        setSelectedRoom,
+        dateModuleVisibility,
+        setDateModuleVisibility,
       }}
     >
       {children}
