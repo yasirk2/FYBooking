@@ -1,5 +1,6 @@
 import MainContext from "./contexts/MainContext";
 import { useEffect, useState } from "react";
+import { getSelectedItems } from "../data/db";
 
 const MainProvider = ({ children }) => {
   const [userPageDisplay, setUserPageDisplay] = useState(null);
@@ -12,6 +13,7 @@ const MainProvider = ({ children }) => {
   const [selectedDateTime, setSelectedDateTime] = useState({});
   const [selectedRoom, setSelectedRoom] = useState("");
   const [dateModuleVisibility, setDateModuleVisibility] = useState(false);
+  const [rooms, setRooms] = useState(getSelectedItems("rooms"));
 
   // Sparar previousPage i sessionStorage ifall en refresh utförs
   useEffect(() => {
@@ -37,6 +39,8 @@ const MainProvider = ({ children }) => {
         setSelectedRoom,
         dateModuleVisibility,
         setDateModuleVisibility,
+        rooms, 
+        setRooms,
       }}
     >
       {children}

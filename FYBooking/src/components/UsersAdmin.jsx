@@ -110,12 +110,12 @@ const UsersAdmin = () => {
       <h2>Existing Users</h2>
       {users && (
         <div>
-          {users.map((user, index) => {
+          {users.map((user) => {
             return (
-              <div key={index}>
+              <div key={user.user_id}>
                 <p>{user.user_id}</p>
                 <h3>{user.username}</h3>
-                <button onClick={() => removeUser(index)}>X</button>
+                <button onClick={() => removeUser(user.user_id)}>X</button>
               </div>
             );
           })}

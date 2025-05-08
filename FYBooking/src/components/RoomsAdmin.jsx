@@ -7,13 +7,12 @@ const RoomsAdmin = () => {
   const [formVisibility, setFormVisibility] = useState(false);
   const [newRoomData, setNewRoomData] = useState({
     room_name: "",
-    slot_duration: "",
+    slot_duration: 30,
     start_time: "08:00",
     end_time: "12:00",
   });
   const [roomId, setRoomId] = useState(0);
-  const [rooms, setRooms] = useState(getSelectedItems("rooms"));
-  const { setAdminPageDisplay } = useContext(MainContext);
+  const { setAdminPageDisplay, rooms, setRooms } = useContext(MainContext);
 
   let tempOrg = "FYBooking";
 
@@ -35,19 +34,23 @@ const RoomsAdmin = () => {
       room_id: roomId,
     };
 
-    addNewObject("rooms", newRoom);
-    setRooms(getSelectedItems("rooms"));
+    console.log(newRoom);
+    
 
-    setNewRoomData((prevData) => ({
-      ...prevData,
-      room_name: "",
-      slot_duration: "",
-      start_time: "08:00",
-      end_time: "12:00",
-    }));
+    if (newRoomData.start_time < newRoomData.end_time) {
+      addNewObject("rooms", newRoom);
+      setRooms(getSelectedItems("rooms"));
+      setNewRoomData((prevData) => ({
+        ...prevData,
+        room_name: "",
+        slot_duration: 30,
+        start_time: "08:00",
+        end_time: "12:00",
+      }));
+    }
   };
 
-  // Function to remove a user
+  // Function to remove a room
   const removeRoom = (index) => {
     deleteObject("rooms", "room_id", index);
     setRooms(getSelectedItems("rooms"));
@@ -115,15 +118,17 @@ const RoomsAdmin = () => {
       <h2>Existing Rooms</h2>
       {rooms && (
         <div>
-          {rooms.map((room, index) => {
+          {rooms.map((room) => {
             return (
-              <div key={index}>
+              <div key={room.room_id}>
                 <p>{room.room_id}</p>
                 <h3>{room.room_name}</h3>
-                <p>{room.start_time} - {room.end_time}</p>
-                <button onClick={() => removeRoom(index)}>X</button>
+                <p>
+                  {room.start_time} - {room.end_time}
+                </p>
+                <button onClick={() => removeRoom(room.room_id)}>X</button>
               </div>
-            )
+            );
           })}
         </div>
       )}
