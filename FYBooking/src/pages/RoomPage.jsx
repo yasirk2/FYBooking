@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import UserButton from "../components/UserButton";
 import "../styles/RoomPageStyle.css";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import MainContext from "../providers/contexts/MainContext";
 
 const RoomPage = () => {
@@ -11,6 +11,10 @@ const RoomPage = () => {
   const navigateToMainPage = () => {
     navigate("/main");
   };
+
+  useEffect(() => {
+    console.log(sessionStorage.getItem("username"));
+  }, [sessionStorage.getItem("username")]);
 
   return (
     <>

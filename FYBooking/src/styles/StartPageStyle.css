@@ -16,3 +16,9 @@
   width: 70%;
   height: 40px;
 }
+
+.wrong-login-info {
+  text-align: center;
+  padding: 20px;
+  color: red;
+}
