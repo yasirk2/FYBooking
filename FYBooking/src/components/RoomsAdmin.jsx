@@ -35,7 +35,6 @@ const RoomsAdmin = () => {
     };
 
     console.log(newRoom);
-    
 
     if (newRoomData.start_time < newRoomData.end_time) {
       addNewObject("rooms", newRoom);
@@ -84,7 +83,7 @@ const RoomsAdmin = () => {
               onChange={(e) => handleChange(e, setNewRoomData)}
               value={newRoomData.slot_duration}
               min={30}
-              step={10}
+              step={5}
             />
             <fieldset>
               <legend>Booking Time Span</legend>

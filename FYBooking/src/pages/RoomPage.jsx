@@ -12,10 +12,6 @@ const RoomPage = () => {
     navigate("/main");
   };
 
-  useEffect(() => {
-    console.log(sessionStorage.getItem("username"));
-  }, [sessionStorage.getItem("username")]);
-
   return (
     <>
       <h1 className="page-title">Choose Room</h1>
@@ -29,7 +25,11 @@ const RoomPage = () => {
                   className="room-button"
                   onClick={(e) => {
                     navigateToMainPage();
-                    setSelectedRoom(e.target.innerText);
+
+                    sessionStorage.setItem(
+                      "selectedRoom",
+                      JSON.stringify(room)
+                    );
                   }}
                 >
                   {room.room_name}

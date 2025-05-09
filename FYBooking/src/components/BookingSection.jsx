@@ -5,10 +5,13 @@ import MainContext from "../providers/contexts/MainContext";
 const BookingSection = () => {
   const { selectedDate, setSelectedDateTime, setDateModuleVisibility } =
     useContext(MainContext);
+  const [selectedRoom] = useState(
+    JSON.parse(sessionStorage.getItem("selectedRoom"))
+  );
   const [timeSlots, setTimeSlots] = useState(null);
-  const startTime = "08:00";
-  const endTime = "16:00";
-  const intervall = 60;
+  const startTime = selectedRoom.start_time;
+  const endTime = selectedRoom.end_time;
+  const intervall = Number(selectedRoom.slot_duration);
 
   //   generates timeSlots.
   const generateIntervall = (startTime, endTime, intervall) => {

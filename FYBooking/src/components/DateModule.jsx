@@ -19,7 +19,7 @@ const DateModule = () => {
       </button>
       <div className="date-module-inner-div">
         <div className="date-module-info-div">
-          <p>{selectedRoom}</p>
+          <p>{selectedRoom.room_name}</p>
           <p>{`${selectedDateTime.dayName} ${selectedDateTime.date} ${selectedDateTime.month}`}</p>
           <p>{`${selectedDateTime.startTime} - ${selectedDateTime.endTime}`}</p>
         </div>
