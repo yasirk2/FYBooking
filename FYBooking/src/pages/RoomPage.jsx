@@ -6,7 +6,7 @@ import MainContext from "../providers/contexts/MainContext";
 
 const RoomPage = () => {
   const navigate = useNavigate();
-  const { setSelectedRoom } = useContext(MainContext);
+  const { setSelectedRoom, rooms } = useContext(MainContext);
 
   const navigateToMainPage = () => {
     navigate("/main");
@@ -20,42 +20,24 @@ const RoomPage = () => {
     <>
       <h1 className="page-title">Choose Room</h1>
       <div className="room-list">
-        <button
-          className="room-button"
-          onClick={(e) => {
-            navigateToMainPage();
-            setSelectedRoom(e.target.innerText);
-          }}
-        >
-          Office 1
-        </button>
-        <button
-          className="room-button"
-          onClick={(e) => {
-            navigateToMainPage();
-            setSelectedRoom(e.target.innerText);
-          }}
-        >
-          Office 2
-        </button>
-        <button
-          className="room-button"
-          onClick={(e) => {
-            navigateToMainPage();
-            setSelectedRoom(e.target.innerText);
-          }}
-        >
-          Office 3
-        </button>
-        <button
-          className="room-button"
-          onClick={(e) => {
-            navigateToMainPage();
-            setSelectedRoom(e.target.innerText);
-          }}
-        >
-          Office 4
-        </button>
+        {rooms && (
+          <>
+            {rooms.map((room) => {
+              return (
+                <button
+                  key={room.room_id}
+                  className="room-button"
+                  onClick={(e) => {
+                    navigateToMainPage();
+                    setSelectedRoom(e.target.innerText);
+                  }}
+                >
+                  {room.room_name}
+                </button>
+              );
+            })}
+          </>
+        )}
       </div>
       <UserButton originalPage={"room"} />
     </>
