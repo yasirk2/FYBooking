@@ -34,8 +34,6 @@ const RoomsAdmin = () => {
       room_id: roomId,
     };
 
-    console.log(newRoom);
-
     if (newRoomData.start_time < newRoomData.end_time) {
       addNewObject("rooms", newRoom);
       setRooms(getSelectedItems("rooms"));

@@ -15,6 +15,9 @@ const UserPage = () => {
   };
 
   const logout = () => {
+    sessionStorage.removeItem("loggedInUser")
+    sessionStorage.removeItem("username");
+    sessionStorage.removeItem("role");
     navigate("/");
   };
 
