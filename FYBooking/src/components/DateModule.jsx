@@ -18,6 +18,7 @@ const DateModule = () => {
 
   const [bookingId, setBookingId] = useState(0);
   const getbookings = getSelectedItems("bookings");
+  const loggedInUser = getSelectedItems("loggedInUser")
 
   const [newBookingData, setNewBookingData] = useState({
     room_name: selectedRoom.room_name,
@@ -27,8 +28,8 @@ const DateModule = () => {
     date: selectedDateTime.date,
     dayName: selectedDateTime.dayName,
     month: selectedDateTime.month,
-    user_id: sessionStorage.getItem("userId"),
-    username: sessionStorage.getItem("username"),
+    user_id: loggedInUser.user_id,
+    username: loggedInUser.username,
     organization: selectedRoom.organization,
   });
 

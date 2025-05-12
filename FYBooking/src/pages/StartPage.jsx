@@ -17,10 +17,7 @@ const StartPage = () => {
     if (findUser === undefined) {
       setLoginInfo(false);
     } else if (findUser.password === password) {
-      addNewObject("loggedInUser", findUser)
-      sessionStorage.setItem("username", findUser.username);
-      sessionStorage.setItem("role", findUser.role);
-      sessionStorage.setItem("userId", findUser.user_id);
+      sessionStorage.setItem("loggedInUser", JSON.stringify(findUser))
       navigate("/room");
       setLoginInfo(true);
     }
