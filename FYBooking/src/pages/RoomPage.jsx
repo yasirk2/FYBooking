@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import UserButton from "../components/UserButton";
 import "../styles/RoomPageStyle.css";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import MainContext from "../providers/contexts/MainContext";
 
 const RoomPage = () => {
   const navigate = useNavigate();
-  const { setSelectedRoom, rooms } = useContext(MainContext);
+  const { rooms } = useContext(MainContext);
 
   const navigateToMainPage = () => {
     navigate("/main");
@@ -23,7 +23,7 @@ const RoomPage = () => {
                 <button
                   key={room.room_id}
                   className="room-button"
-                  onClick={(e) => {
+                  onClick={() => {
                     navigateToMainPage();
 
                     sessionStorage.setItem(

@@ -15,20 +15,13 @@ const StartPage = () => {
     const findUser = users.find((user) => user.username === username);
 
     if (findUser === undefined) {
-      console.log("username or password is wrong");
       setLoginInfo(false);
     } else if (findUser.password === password) {
-      sessionStorage.setItem("username", findUser.username);
-      sessionStorage.setItem("role", findUser.role);
-      sessionStorage.setItem("userId", findUser.user_id);
+      sessionStorage.setItem("loggedInUser", JSON.stringify(findUser))
       navigate("/room");
       setLoginInfo(true);
     }
   };
-
-  useEffect(() => {
-    console.log(users);
-  }, []);
 
   // Creates the first admin account
   useEffect(() => {

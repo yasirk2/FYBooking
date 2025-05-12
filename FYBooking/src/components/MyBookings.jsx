@@ -11,7 +11,7 @@ const MyBookings = () => {
   return (
     <>
       <p>MyBookings</p>
-      <button onClick={goBack}>Back</button>
+      <button className="user-action-button my-profile-bookings" onClick={goBack}>Back</button>
     </>
   );
 };

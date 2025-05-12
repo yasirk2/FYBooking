@@ -4,17 +4,21 @@ import MainContext from "../providers/contexts/MainContext";
 import { useContext } from "react";
 import MyProfile from "../components/MyProfile";
 import MyBookings from "../components/MyBookings";
+import { getSelectedItems } from "../data/db";
 
 const UserPage = () => {
   const navigate = useNavigate();
   const { userPageDisplay, setUserPageDisplay, previousPage } =
     useContext(MainContext);
+  const loggedInUser = getSelectedItems("loggedInUser")
+  
 
   const navigateToAdminPage = () => {
     navigate("/admin");
   };
 
   const logout = () => {
+    sessionStorage.removeItem("loggedInUser")
     navigate("/");
   };
 
@@ -36,7 +40,7 @@ const UserPage = () => {
         </>
       ) : (
         <>
-          <h1 className="page-title">{sessionStorage.getItem("username")}</h1>
+          <h1 className="page-title">{loggedInUser.username}</h1>
           <div className="user-menu">
             <button
               className="user-action-button"
@@ -50,7 +54,7 @@ const UserPage = () => {
             >
               My bookings
             </button>
-            {sessionStorage.getItem("role") === "admin" && (
+            {loggedInUser.role === "admin" && (
               <button
                 className="user-action-button"
                 onClick={navigateToAdminPage}

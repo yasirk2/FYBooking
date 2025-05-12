@@ -18,3 +18,23 @@
 .user-action-button:first-of-type {
   margin-top: 40px;
 }
+
+.user-profile-container{
+  margin-top: 20px;
+  padding: 20px
+}
+
+.user-profile-label {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.user-profile-value {
+  border-bottom: 1px solid black;
+  padding: 5px;
+  margin: 0px 5px 20px 5px;
+}
+
+.my-profile-bookings {
+  margin: auto;
+}
