@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 const StartPage = () => {
   const navigate = useNavigate();
-  const [users] = useState(getSelectedItems("users"));
+  const [users, setUsers] = useState(getSelectedItems("users"));
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginInfo, setLoginInfo] = useState();
@@ -17,7 +17,7 @@ const StartPage = () => {
     if (findUser === undefined) {
       setLoginInfo(false);
     } else if (findUser.password === password) {
-      sessionStorage.setItem("loggedInUser", JSON.stringify(findUser))
+      sessionStorage.setItem("loggedInUser", JSON.stringify(findUser));
       navigate("/room");
       setLoginInfo(true);
     }
@@ -26,7 +26,6 @@ const StartPage = () => {
   // Creates the first admin account
   useEffect(() => {
     const storedUsers = getSelectedItems("users");
-
     if (storedUsers.length === 0) {
       const adminUser = {
         username: "admin",
@@ -36,6 +35,7 @@ const StartPage = () => {
         user_id: 0,
       };
       addNewObject("users", adminUser);
+      setUsers(getSelectedItems("users"));
     }
   }, []);
 
