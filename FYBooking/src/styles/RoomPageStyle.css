@@ -12,6 +12,11 @@
   height: 40px;
   border: black solid 1px;
   border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.room-button:first-of-type {
+  margin-top: 40px;
 }
 
 .page-footer {

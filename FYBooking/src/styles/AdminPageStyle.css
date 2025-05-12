@@ -12,4 +12,110 @@
   height: 40px;
   border: black solid 1px;
   border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.admin-action-button:first-of-type {
+  margin-top: 40px;
+}
+
+.admin-add-container {
+  display: flex;
+  flex-direction: column;
+  border: 2px black solid;
+  border-radius: 10px;
+  margin: 1rem 8% 0 8%;
+  padding: 1rem;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
+}
+
+.admin-add-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-add-container form button {
+  border-radius: 20px;
+  width: 70%;
+  height: 40px;
+  margin: auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.exit-button {
+  border: none;
+  background-color: transparent;
+  color: black;
+  font-size: 24px;
+  font-weight: bold;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+}
+
+.admin-form-label {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 4px;
+}
+
+.admin-form-input {
+  border: 0px;
+  border-bottom: 1px solid black;
+  padding: 6px 8px 6px 8px;
+  margin: 0px 10px 16px 10px;
+}
+
+.admin-fieldset {
+  border: 0px;
+}
+
+.time-inputs {
+  padding: 6px 0px;
+  margin: 0px 10px 16px 10px;
+}
+
+.time-inputs input {
+  border: 0px;
+  border-bottom: 1px solid black;
+  padding: 0px 4px;
+}
+.time-inputs span {
+  padding: 0px 4px;
+}
+
+.role-inputs {
+  padding: 6px 0px;
+  margin: 0px 10px 16px 10px;
+}
+
+.role-inputs label{
+  margin-right: 20px;
+}
+
+.role-inputs input{
+  margin-right: 4px;
+}
+
+.admin-user-or-room-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height: 40px;
+  border: black solid 1px;
+  border-radius: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.admin-user-or-room-buttons:first-of-type {
+  margin-top: 40px;
+}
+
+.admin-user-or-room-buttons:last-of-type {
+  margin-bottom: 60px;
 }

@@ -70,6 +70,7 @@ const UserPage = () => {
           </div>
         </>
       )}
+      <footer className="page-footer "/>
     </>
   );
 };

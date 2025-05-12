@@ -47,6 +47,7 @@ const AdminPage = () => {
           </div>
         </>
       )}
+      <footer className="page-footer "/>
     </>
   );
 };
