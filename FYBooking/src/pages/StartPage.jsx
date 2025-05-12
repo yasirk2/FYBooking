@@ -20,6 +20,7 @@ const StartPage = () => {
     } else if (findUser.password === password) {
       sessionStorage.setItem("username", findUser.username);
       sessionStorage.setItem("role", findUser.role);
+      sessionStorage.setItem("userId", findUser.user_id);
       navigate("/room");
       setLoginInfo(true);
     }

@@ -67,15 +67,17 @@ const BookingSection = () => {
           return (
             <div
               onClick={() => {
-                setSelectedDateTime((prev) => ({
-                  ...prev,
-                  date: selectedDate.date,
-                  dayFullName: selectedDate.dayFullName,
-                  dayName: selectedDate.dayName,
-                  month: selectedDate.month,
-                  startTime: timeSlot,
-                  endTime: endTime,
-                }));
+                sessionStorage.setItem(
+                  "setSelectedDateTime",
+                  JSON.stringify({
+                    date: selectedDate.date,
+                    dayFullName: selectedDate.dayFullName,
+                    dayName: selectedDate.dayName,
+                    month: selectedDate.month,
+                    startTime: timeSlot,
+                    endTime: endTime,
+                  })
+                );
                 setDateModuleVisibility(true);
               }}
               className="booking-slot"
