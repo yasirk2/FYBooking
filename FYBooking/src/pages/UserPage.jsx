@@ -7,7 +7,8 @@ import MyBookings from "../components/MyBookings";
 
 const UserPage = () => {
   const navigate = useNavigate();
-  const { userPageDisplay, setUserPageDisplay, previousPage } = useContext(MainContext);
+  const { userPageDisplay, setUserPageDisplay, previousPage } =
+    useContext(MainContext);
 
   const navigateToAdminPage = () => {
     navigate("/admin");
@@ -26,16 +27,16 @@ const UserPage = () => {
       {userPageDisplay === "profile" ? (
         <>
           <h1 className="page-title">My Profile</h1>
-          <MyProfile/>
+          <MyProfile />
         </>
       ) : userPageDisplay === "booking" ? (
         <>
           <h1 className="page-title">My Bookings</h1>
-          <MyBookings/>
+          <MyBookings />
         </>
       ) : (
         <>
-          <h1 className="page-title">Username</h1>
+          <h1 className="page-title">{sessionStorage.getItem("username")}</h1>
           <div className="user-menu">
             <button
               className="user-action-button"
@@ -49,13 +50,21 @@ const UserPage = () => {
             >
               My bookings
             </button>
-            <button className="user-action-button" onClick={navigateToAdminPage}>
-              Admin panel
-            </button>
+            {sessionStorage.getItem("role") === "admin" && (
+              <button
+                className="user-action-button"
+                onClick={navigateToAdminPage}
+              >
+                Admin panel
+              </button>
+            )}
             <button className="user-action-button" onClick={logout}>
               Logout
             </button>
-            <button className="user-action-button" onClick={navigateToPreviousPage}>
+            <button
+              className="user-action-button"
+              onClick={navigateToPreviousPage}
+            >
               Back
             </button>
           </div>
