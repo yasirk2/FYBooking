@@ -4,8 +4,12 @@ import MainContext from "../providers/contexts/MainContext";
 import { addNewObject, getSelectedItems } from "../data/db";
 
 const DateModule = () => {
-  const { setDateModuleVisibility, updateBookings, setUpdateBookings } =
-    useContext(MainContext);
+  const {
+    setDateModuleVisibility,
+    updateBookings,
+    setUpdateBookings,
+    isBooked,
+  } = useContext(MainContext);
 
   const [selectedDateTime] = useState(
     JSON.parse(sessionStorage.getItem("setSelectedDateTime"))
@@ -16,7 +20,7 @@ const DateModule = () => {
 
   const [bookingId, setBookingId] = useState(0);
   const getbookings = getSelectedItems("bookings");
-  const loggedInUser = getSelectedItems("loggedInUser")
+  const loggedInUser = getSelectedItems("loggedInUser");
 
   const [newBookingData, setNewBookingData] = useState({
     room_name: selectedRoom.room_name,
@@ -62,17 +66,28 @@ const DateModule = () => {
           <p>{selectedRoom.room_name}</p>
           <p>{`${selectedDateTime.dayName} ${selectedDateTime.date} ${selectedDateTime.month}`}</p>
           <p>{`${selectedDateTime.startTime} - ${selectedDateTime.endTime}`}</p>
+          {isBooked && <p style={{ color: "#ffb7b7" }}>Is already booked</p>}
         </div>
 
-        <button
-          onClick={() => {
-            createBooking();
-            setUpdateBookings(!updateBookings);
-          }}
-          className="date-module-book-btn"
-        >
-          Book
-        </button>
+        {isBooked ? (
+          <button
+            onClick={() => setDateModuleVisibility(false)}
+            className="date-module-book-btn"
+          >
+            Close
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              createBooking();
+              setUpdateBookings(!updateBookings);
+              setDateModuleVisibility(false);
+            }}
+            className="date-module-book-btn"
+          >
+            Book
+          </button>
+        )}
       </div>
     </div>
   );

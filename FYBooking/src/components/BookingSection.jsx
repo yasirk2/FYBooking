@@ -9,6 +9,7 @@ const BookingSection = () => {
     setSelectedDateTime,
     setDateModuleVisibility,
     updateBookings,
+    setIsBooked,
   } = useContext(MainContext);
   const [selectedRoom] = useState(
     JSON.parse(sessionStorage.getItem("selectedRoom"))
@@ -60,7 +61,6 @@ const BookingSection = () => {
 
   useEffect(() => {
     generateIntervall(startTime, endTime, intervall);
-    console.log(updateBookings);
     setBookings(getSelectedItems("bookings"));
   }, [selectedDate, updateBookings]);
 
@@ -94,6 +94,7 @@ const BookingSection = () => {
                     endTime: endTime,
                   })
                 );
+                setIsBooked(checkBookings);
                 setDateModuleVisibility(true);
               }}
               className={
