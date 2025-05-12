@@ -1,10 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import "../styles/MainPageStyle.css";
 import MainContext from "../providers/contexts/MainContext";
+import { getSelectedItems } from "../data/db";
 
 const BookingSection = () => {
-  const { selectedDate, setSelectedDateTime, setDateModuleVisibility } =
-    useContext(MainContext);
+  const {
+    selectedDate,
+    setSelectedDateTime,
+    setDateModuleVisibility,
+    updateBookings,
+  } = useContext(MainContext);
   const [selectedRoom] = useState(
     JSON.parse(sessionStorage.getItem("selectedRoom"))
   );
@@ -12,6 +17,7 @@ const BookingSection = () => {
   const startTime = selectedRoom.start_time;
   const endTime = selectedRoom.end_time;
   const intervall = Number(selectedRoom.slot_duration);
+  const [bookings, setBookings] = useState(null);
 
   //   generates timeSlots.
   const generateIntervall = (startTime, endTime, intervall) => {
@@ -54,7 +60,9 @@ const BookingSection = () => {
 
   useEffect(() => {
     generateIntervall(startTime, endTime, intervall);
-  }, [selectedDate]);
+    console.log(updateBookings);
+    setBookings(getSelectedItems("bookings"));
+  }, [selectedDate, updateBookings]);
 
   return (
     <div className="lower-main-page">
@@ -64,6 +72,14 @@ const BookingSection = () => {
           if (index === timeSlots[1].length - 1) {
             return null;
           }
+          const checkBookings = bookings.some(
+            (booking) =>
+              booking.dayName === selectedDate.dayName &&
+              booking.date === selectedDate.date &&
+              booking.month === selectedDate.month &&
+              booking.start_time === timeSlot
+          );
+
           return (
             <div
               onClick={() => {
@@ -80,7 +96,11 @@ const BookingSection = () => {
                 );
                 setDateModuleVisibility(true);
               }}
-              className="booking-slot"
+              className={
+                checkBookings
+                  ? `booking-slot-unavailable`
+                  : `booking-slot-available`
+              }
               key={index}
             >
               <p>{timeSlot}</p>

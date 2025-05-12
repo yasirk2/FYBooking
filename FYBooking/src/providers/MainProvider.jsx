@@ -14,6 +14,7 @@ const MainProvider = ({ children }) => {
   const [selectedRoom, setSelectedRoom] = useState("");
   const [dateModuleVisibility, setDateModuleVisibility] = useState(false);
   const [rooms, setRooms] = useState(getSelectedItems("rooms"));
+  const [updateBookings, setUpdateBookings] = useState(false);
 
   // Sparar previousPage i sessionStorage ifall en refresh utförs
   useEffect(() => {
@@ -39,8 +40,10 @@ const MainProvider = ({ children }) => {
         setSelectedRoom,
         dateModuleVisibility,
         setDateModuleVisibility,
-        rooms, 
+        rooms,
         setRooms,
+        updateBookings,
+        setUpdateBookings,
       }}
     >
       {children}

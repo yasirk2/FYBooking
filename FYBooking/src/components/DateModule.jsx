@@ -4,10 +4,8 @@ import MainContext from "../providers/contexts/MainContext";
 import { addNewObject, getSelectedItems } from "../data/db";
 
 const DateModule = () => {
-  // const { selectedDateTime, selectedRoom, setDateModuleVisibility } =
-  //   useContext(MainContext);
-
-  const { setDateModuleVisibility } = useContext(MainContext);
+  const { setDateModuleVisibility, updateBookings, setUpdateBookings } =
+    useContext(MainContext);
 
   const [selectedDateTime] = useState(
     JSON.parse(sessionStorage.getItem("setSelectedDateTime"))
@@ -65,7 +63,13 @@ const DateModule = () => {
           <p>{`${selectedDateTime.startTime} - ${selectedDateTime.endTime}`}</p>
         </div>
 
-        <button onClick={createBooking} className="date-module-book-btn">
+        <button
+          onClick={() => {
+            createBooking();
+            setUpdateBookings(!updateBookings);
+          }}
+          className="date-module-book-btn"
+        >
           Book
         </button>
       </div>
