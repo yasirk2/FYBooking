@@ -62,20 +62,23 @@ const RoomsAdmin = () => {
   return (
     <>
       {formVisibility === true && (
-        <div>
-          <button onClick={() => setFormVisibility(false)}>X</button>
+        <div className="admin-add-container">
+          <button className="exit-button" onClick={() => setFormVisibility(false)}>X</button>
           <form className="add-room-form" onSubmit={createRoom}>
-            <label htmlFor="room-name">Room Name</label>
+            <label className="admin-form-label" htmlFor="room-name">Room Name</label>
             <input
+              className="admin-form-input"
               type="text"
               name="room_name"
               id="room-name"
               onChange={(e) => handleChange(e, setNewRoomData)}
               value={newRoomData.room_name}
               placeholder="Room Name"
+              required
             />
-            <label htmlFor="slot-duration">Booking Duration</label>
+            <label className="admin-form-label" htmlFor="slot-duration">Booking Duration</label>
             <input
+              className="admin-form-input"
               type="number"
               name="slot_duration"
               id="slot-duration"
@@ -83,10 +86,10 @@ const RoomsAdmin = () => {
               onChange={(e) => handleChange(e, setNewRoomData)}
               value={newRoomData.slot_duration}
               min={30}
-              step={5}
+              step={30}
             />
-            <fieldset>
-              <legend>Booking Time Span</legend>
+            <fieldset className="admin-fieldset">
+              <legend className="admin-form-label">Booking Time Span</legend>
               <div className="time-inputs">
                 <input
                   type="time"
@@ -113,25 +116,29 @@ const RoomsAdmin = () => {
           </form>
         </div>
       )}
-      <button onClick={() => setFormVisibility(true)}>Add New Room</button>
-      <h2>Existing Rooms</h2>
-      {rooms && (
-        <div>
-          {rooms.map((room) => {
-            return (
-              <div key={room.room_id}>
-                <p>{room.room_id}</p>
-                <h3>{room.room_name}</h3>
-                <p>
-                  {room.start_time} - {room.end_time}
-                </p>
-                <button onClick={() => removeRoom(room.room_id)}>X</button>
-              </div>
-            );
-          })}
-        </div>
+      {formVisibility === false && (
+        <>
+          <button className="admin-user-or-room-buttons" onClick={() => setFormVisibility(true)}>Add New Room</button>
+          <h2>Existing Rooms</h2>
+          {rooms && (
+            <div>
+              {rooms.map((room) => {
+                return (
+                  <div key={room.room_id}>
+                    <p>{room.room_id}</p>
+                    <h3>{room.room_name}</h3>
+                    <p>
+                      {room.start_time} - {room.end_time}
+                    </p>
+                    <button onClick={() => removeRoom(room.room_id)}>X</button>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+          <button className="admin-user-or-room-buttons" onClick={goBack}>Back</button>
+        </>
       )}
-      <button onClick={goBack}>Back</button>
     </>
   );
 };

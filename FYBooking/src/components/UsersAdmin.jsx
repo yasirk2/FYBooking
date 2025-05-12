@@ -58,70 +58,89 @@ const UsersAdmin = () => {
   return (
     <>
       {formVisibility === true && (
-        <div>
-          <button onClick={() => setFormVisibility(false)}>X</button>
+        <div className="admin-add-container">
+          <button
+            className="exit-button"
+            onClick={() => setFormVisibility(false)}
+          >
+            X
+          </button>
           <form className="add-user-form" onSubmit={createUser}>
-            <label htmlFor="new-user-username">Username</label>
+            <label className="admin-form-label" htmlFor="new-user-username">
+              Username
+            </label>
             <input
+              className="admin-form-input"
               type="text"
               name="username"
               id="new-user-username"
               onChange={(e) => handleChange(e, setNewUserData)}
               value={newUserData.username}
               placeholder="Username"
+              required
             />
-            <label htmlFor="new-user-password">Password</label>
+            <label className="admin-form-label" htmlFor="new-user-password">
+              Password
+            </label>
             <input
+              className="admin-form-input"
               type="password"
               name="password"
               id="new-user-password"
               onChange={(e) => handleChange(e, setNewUserData)}
               value={newUserData.password}
               placeholder="Password"
+              required
             />
-            <fieldset>
-              <legend>Role</legend>
-              <label>
-                <input
-                  type="radio"
-                  name="role"
-                  value="client"
-                  checked={newUserData.role === "client"}
-                  onChange={(e) => handleChange(e, setNewUserData)}
-                />
-                Client
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="role"
-                  value="admin"
-                  checked={newUserData.role === "admin"}
-                  onChange={(e) => handleChange(e, setNewUserData)}
-                />
-                Admin
-              </label>
+            <fieldset className="admin-fieldset">
+              <legend className="admin-form-label">Role</legend>
+              <div className="role-inputs">
+                <label>
+                  <input
+                    type="radio"
+                    name="role"
+                    value="client"
+                    checked={newUserData.role === "client"}
+                    onChange={(e) => handleChange(e, setNewUserData)}
+                  />
+                  Client
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="role"
+                    value="admin"
+                    checked={newUserData.role === "admin"}
+                    onChange={(e) => handleChange(e, setNewUserData)}
+                  />
+                  Admin
+                </label>
+              </div>
             </fieldset>
             <button type="submit">Create User</button>
           </form>
         </div>
       )}
-      <button onClick={() => setFormVisibility(true)}>Add New User</button>
-      <h2>Existing Users</h2>
-      {users && (
-        <div>
-          {users.map((user) => {
-            return (
-              <div key={user.user_id}>
-                <p>{user.user_id}</p>
-                <h3>{user.username}</h3>
-                <button onClick={() => removeUser(user.user_id)}>X</button>
-              </div>
-            );
-          })}
-        </div>
+      {formVisibility === false && (
+        <>
+          <button className="admin-user-or-room-buttons" onClick={() => setFormVisibility(true)}>Add New User</button>
+          <h2>Existing Users</h2>
+          {users && (
+            <div>
+              {users.map((user) => {
+                return (
+                  <div key={user.user_id}>
+                    <p>{user.user_id}</p>
+                    <h3>{user.username}</h3>
+                    <button onClick={() => removeUser(user.user_id)}>X</button>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+          <button className="admin-user-or-room-buttons" onClick={goBack}>Back</button>
+        </>
       )}
-      <button onClick={goBack}>Back</button>
     </>
   );
 };
