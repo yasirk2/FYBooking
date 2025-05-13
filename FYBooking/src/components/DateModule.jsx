@@ -55,12 +55,14 @@ const DateModule = () => {
   };
   return (
     <div className="date-module-div">
-      <button
-        onClick={() => setDateModuleVisibility(false)}
-        className="date-module-close-btn"
-      >
-        X
-      </button>
+      {!isBooked && (
+        <button
+          onClick={() => setDateModuleVisibility(false)}
+          className="date-module-close-btn"
+        >
+          X
+        </button>
+      )}
       <div className="date-module-inner-div">
         <div className="date-module-info-div">
           <p>{selectedRoom.room_name}</p>

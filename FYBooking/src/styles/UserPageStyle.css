@@ -38,3 +38,56 @@
 .my-profile-bookings {
   margin: auto;
 }
+
+.booking-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 95%;
+  min-height: 52px;
+  margin: auto;
+  border: 1px solid black;
+  margin-bottom: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.booking-container:first-of-type {
+  margin-top: 40px;
+}
+
+.date-tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: none;
+  border-radius: 8px 0px 0px 8px;
+  border-right: 1px solid black;
+  padding: 0 8px;
+  font-size: 16px;
+}
+
+.my-booking-information {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.my-booking-information p {
+  padding: 2px;
+}
+
+.cancel-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: lightcoral;
+  border: none;
+  border-left: 1px solid black;
+  border-radius: 0px 8px 8px 0px;
+  padding: 0 8px;
+  font-size: 16px;
+}

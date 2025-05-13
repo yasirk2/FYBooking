@@ -99,8 +99,8 @@ const BookingSection = () => {
               }}
               className={
                 checkBookings
-                  ? `booking-slot-unavailable`
-                  : `booking-slot-available`
+                  ? `booking-slot unavailable`
+                  : `booking-slot`
               }
               key={index}
             >

@@ -117,18 +117,20 @@ const RoomsAdmin = () => {
       {formVisibility === false && (
         <>
           <button className="admin-user-or-room-buttons" onClick={() => setFormVisibility(true)}>Add New Room</button>
-          <h2>Existing Rooms</h2>
+          <h2 className="user-or-room-display-title">Existing Rooms</h2>
           {rooms && (
             <div>
               {rooms.map((room) => {
                 return (
-                  <div key={room.room_id}>
-                    <p>{room.room_id}</p>
-                    <h3>{room.room_name}</h3>
-                    <p>
-                      {room.start_time} - {room.end_time}
-                    </p>
-                    <button onClick={() => removeRoom(room.room_id)}>X</button>
+                  <div className="user-or-room-display-container" key={room.room_id}>
+                    <p className="id-tag">{room.room_id}</p>
+                    <span className="main-information">
+                      <h3>{room.room_name}</h3>
+                      <p>
+                        {room.start_time} - {room.end_time}
+                      </p>
+                    </span>
+                    <button className="edit-button" onClick={() => removeRoom(room.room_id)}>X</button>
                   </div>
                 );
               })}

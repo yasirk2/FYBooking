@@ -9,16 +9,19 @@ import MainContext from "../providers/contexts/MainContext";
 
 const MainPage = () => {
   const navigate = useNavigate();
-  const { dateModuleVisibility } = useContext(MainContext);
+  const { dateModuleVisibility, setDateModuleVisibility } = useContext(MainContext);
 
   const navigateToRoomPage = () => {
+    setDateModuleVisibility(false)
     navigate("/room");
   };
 
   return (
     <div className="main-page">
-      <button onClick={navigateToRoomPage}>X</button>
-      <Schedule />
+      <button className="return-to-room-page-button" onClick={navigateToRoomPage}>X</button>
+      <div className="main-section-container">
+        <Schedule />
+      </div>
       <BookingSection />
       {dateModuleVisibility === true && <DateModule />}
       <UserButton originalPage={"main"} />

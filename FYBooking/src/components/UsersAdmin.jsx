@@ -124,15 +124,15 @@ const UsersAdmin = () => {
       {formVisibility === false && (
         <>
           <button className="admin-user-or-room-buttons" onClick={() => setFormVisibility(true)}>Add New User</button>
-          <h2>Existing Users</h2>
+          <h2 className="user-or-room-display-title">Existing Users</h2>
           {users && (
             <div>
               {users.map((user) => {
                 return (
-                  <div key={user.user_id}>
-                    <p>{user.user_id}</p>
-                    <h3>{user.username}</h3>
-                    <button onClick={() => removeUser(user.user_id)}>X</button>
+                  <div className="user-or-room-display-container" key={user.user_id}>
+                    <p className="id-tag">{user.user_id}</p>
+                    <h3 className="main-information">{user.username}</h3>
+                    <button className="edit-button" onClick={() => removeUser(user.user_id)}>X</button>
                   </div>
                 );
               })}
