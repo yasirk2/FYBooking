@@ -53,17 +53,20 @@ const RoomsAdmin = () => {
     setRooms(getSelectedItems("rooms"));
   };
 
-  const goBack = () => {
-    setAdminPageDisplay(null);
-  };
-
   return (
     <>
       {formVisibility === true && (
         <div className="admin-add-container">
-          <button className="exit-button" onClick={() => setFormVisibility(false)}>X</button>
+          <button
+            className="exit-button"
+            onClick={() => setFormVisibility(false)}
+          >
+            X
+          </button>
           <form className="add-room-form" onSubmit={createRoom}>
-            <label className="admin-form-label" htmlFor="room-name">Room Name</label>
+            <label className="admin-form-label" htmlFor="room-name">
+              Room Name
+            </label>
             <input
               className="admin-form-input"
               type="text"
@@ -74,7 +77,9 @@ const RoomsAdmin = () => {
               placeholder="Room Name"
               required
             />
-            <label className="admin-form-label" htmlFor="slot-duration">Booking Duration</label>
+            <label className="admin-form-label" htmlFor="slot-duration">
+              Booking Duration
+            </label>
             <input
               className="admin-form-input"
               type="number"
@@ -116,13 +121,21 @@ const RoomsAdmin = () => {
       )}
       {formVisibility === false && (
         <>
-          <button className="admin-user-or-room-buttons" onClick={() => setFormVisibility(true)}>Add New Room</button>
+          <button
+            className="admin-user-or-room-buttons"
+            onClick={() => setFormVisibility(true)}
+          >
+            Add New Room
+          </button>
           <h2 className="user-or-room-display-title">Existing Rooms</h2>
           {rooms && (
             <div>
               {rooms.map((room) => {
                 return (
-                  <div className="user-or-room-display-container" key={room.room_id}>
+                  <div
+                    className="user-or-room-display-container"
+                    key={room.room_id}
+                  >
                     <p className="id-tag">{room.room_id}</p>
                     <span className="main-information">
                       <h3>{room.room_name}</h3>
@@ -130,13 +143,17 @@ const RoomsAdmin = () => {
                         {room.start_time} - {room.end_time}
                       </p>
                     </span>
-                    <button className="edit-button" onClick={() => removeRoom(room.room_id)}>X</button>
+                    <button
+                      className="edit-button"
+                      onClick={() => removeRoom(room.room_id)}
+                    >
+                      X
+                    </button>
                   </div>
                 );
               })}
             </div>
           )}
-          <button className="admin-user-or-room-buttons" onClick={goBack}>Back</button>
         </>
       )}
     </>

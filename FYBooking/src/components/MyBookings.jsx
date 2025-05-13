@@ -15,13 +15,9 @@ const MyBookings = () => {
     setMyBookings(findMyBookings);
   }, [bookings]);
 
-  const goBack = () => {
-    setUserPageDisplay(null);
-  };
-
   const cancelBooking = (objectId) => {
-    deleteObject("bookings", "booking_id", objectId)
-    setBookings(getSelectedItems("bookings"))
+    deleteObject("bookings", "booking_id", objectId);
+    setBookings(getSelectedItems("bookings"));
   };
 
   return (
@@ -42,17 +38,16 @@ const MyBookings = () => {
                   {booking.start_time} - {booking.end_time}
                 </p>
               </div>
-              <button className="cancel-button" onClick={() => cancelBooking(booking.booking_id)}>Cancel</button>
+              <button
+                className="cancel-button"
+                onClick={() => cancelBooking(booking.booking_id)}
+              >
+                Cancel
+              </button>
             </div>
           ))}
         </>
       )}
-      <button
-        className="user-action-button my-profile-bookings"
-        onClick={goBack}
-      >
-        Back
-      </button>
     </>
   );
 };

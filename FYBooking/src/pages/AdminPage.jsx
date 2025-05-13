@@ -1,29 +1,33 @@
-import { useContext } from "react";
 import "../styles/AdminPageStyle.css";
-import { useNavigate } from "react-router-dom";
-import MainContext from "../providers/contexts/MainContext";
 import UsersAdmin from "../components/UsersAdmin";
 import RoomsAdmin from "../components/RoomsAdmin";
+import FooterNav from "../components/FooterNav";
+import { useContext } from "react";
+import MainContext from "../providers/contexts/MainContext";
+import { addNewObject, getSelectedItems } from "../data/db";
 
 const AdminPage = () => {
-  const navigate = useNavigate();
-  const { adminPageDisplay, setAdminPageDisplay } = useContext(MainContext);
+  const { setHistory, displayComponent, setDisplayComponent } =
+    useContext(MainContext);
 
-  const backToUserPage = () => {
-    navigate("/user");
+  const navigateToComponent = (component) => {
+    setDisplayComponent(component);
+    sessionStorage.setItem("component", component);
+    addNewObject("history", { type: "component", value: component });
+    setHistory(getSelectedItems("history"));
   };
 
   return (
     <>
-      {adminPageDisplay === "users" ? (
+      {displayComponent === "users" ? (
         <>
           <h1 className="page-title">Users</h1>
-          <UsersAdmin/>
+          <UsersAdmin />
         </>
-      ) : adminPageDisplay === "rooms" ? (
+      ) : displayComponent === "rooms" ? (
         <>
           <h1 className="page-title">Rooms</h1>
-          <RoomsAdmin/>
+          <RoomsAdmin />
         </>
       ) : (
         <>
@@ -31,23 +35,20 @@ const AdminPage = () => {
           <div className="admin-menu">
             <button
               className="admin-action-button"
-              onClick={() => setAdminPageDisplay("users")}
+              onClick={() => navigateToComponent("users")}
             >
               Users
             </button>
             <button
               className="admin-action-button"
-              onClick={() => setAdminPageDisplay("rooms")}
+              onClick={() => navigateToComponent("rooms")}
             >
               Rooms
-            </button>
-            <button className="admin-action-button" onClick={backToUserPage}>
-              Back
             </button>
           </div>
         </>
       )}
-      <footer className="page-footer "/>
+      <FooterNav />
     </>
   );
 };

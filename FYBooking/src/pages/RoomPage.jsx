@@ -1,15 +1,18 @@
 import { useNavigate } from "react-router-dom";
-import UserButton from "../components/UserButton";
 import "../styles/RoomPageStyle.css";
 import { useContext } from "react";
 import MainContext from "../providers/contexts/MainContext";
+import FooterNav from "../components/FooterNav";
+import { addNewObject, getSelectedItems } from "../data/db";
 
 const RoomPage = () => {
   const navigate = useNavigate();
-  const { rooms } = useContext(MainContext);
+  const { rooms, setHistory } = useContext(MainContext);
 
   const navigateToMainPage = () => {
     navigate("/main");
+    addNewObject("history", { type: "route", value: "/main" });
+    setHistory(getSelectedItems("history"));
   };
 
   return (
@@ -39,7 +42,7 @@ const RoomPage = () => {
           </>
         )}
       </div>
-      <UserButton originalPage={"room"} />
+      <FooterNav />
     </>
   );
 };

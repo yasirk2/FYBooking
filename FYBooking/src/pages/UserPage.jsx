@@ -1,39 +1,46 @@
 import { useNavigate } from "react-router-dom";
 import "../styles/UserPageStyle.css";
-import MainContext from "../providers/contexts/MainContext";
-import { useContext } from "react";
 import MyProfile from "../components/MyProfile";
 import MyBookings from "../components/MyBookings";
-import { getSelectedItems } from "../data/db";
+import { addNewObject, getSelectedItems } from "../data/db";
+import FooterNav from "../components/FooterNav";
+import { useContext } from "react";
+import MainContext from "../providers/contexts/MainContext";
 
 const UserPage = () => {
   const navigate = useNavigate();
-  const { userPageDisplay, setUserPageDisplay, previousPage } =
+  const loggedInUser = getSelectedItems("loggedInUser");
+  const { setHistory, displayComponent, setDisplayComponent } =
     useContext(MainContext);
-  const loggedInUser = getSelectedItems("loggedInUser")
-  
 
   const navigateToAdminPage = () => {
     navigate("/admin");
+    addNewObject("history", { type: "route", value: "/admin" });
+    setHistory(getSelectedItems("history"));
+  };
+
+  const navigateToComponent = (component) => {
+    setDisplayComponent(component);
+    sessionStorage.setItem("component", component);
+    addNewObject("history", { type: "component", value: component });
+    setHistory(getSelectedItems("history"));
   };
 
   const logout = () => {
-    sessionStorage.removeItem("loggedInUser")
+    sessionStorage.removeItem("loggedInUser");
+    sessionStorage.removeItem("history");
+    sessionStorage.removeItem("component");
     navigate("/");
-  };
-
-  const navigateToPreviousPage = () => {
-    navigate(`/${previousPage}`);
   };
 
   return (
     <>
-      {userPageDisplay === "profile" ? (
+      {displayComponent === "myProfile" ? (
         <>
           <h1 className="page-title">My Profile</h1>
           <MyProfile />
         </>
-      ) : userPageDisplay === "booking" ? (
+      ) : displayComponent === "myBooking" ? (
         <>
           <h1 className="page-title">My Bookings</h1>
           <MyBookings />
@@ -44,13 +51,13 @@ const UserPage = () => {
           <div className="user-menu">
             <button
               className="user-action-button"
-              onClick={() => setUserPageDisplay("profile")}
+              onClick={() => navigateToComponent("myProfile")}
             >
               My profile
             </button>
             <button
               className="user-action-button"
-              onClick={() => setUserPageDisplay("booking")}
+              onClick={() => navigateToComponent("myBooking")}
             >
               My bookings
             </button>
@@ -65,16 +72,10 @@ const UserPage = () => {
             <button className="user-action-button" onClick={logout}>
               Logout
             </button>
-            <button
-              className="user-action-button"
-              onClick={navigateToPreviousPage}
-            >
-              Back
-            </button>
           </div>
         </>
       )}
-      <footer className="page-footer "/>
+      <FooterNav />
     </>
   );
 };

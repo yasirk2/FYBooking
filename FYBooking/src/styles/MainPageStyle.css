@@ -85,20 +85,3 @@
 .booking-slot:last-child {
   margin-bottom: 42px;
 }
-
-.return-to-room-page-button {
-  position: absolute;
-  top: 8px;          
-  right: 8px;        
-  border: none;
-  background-color: transparent;
-  color: black;
-  font-size: 24px;
-  font-weight: bold;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}

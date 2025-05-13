@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import "../styles/StartPageStyle.css";
 import { addNewObject, getSelectedItems } from "../data/db";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import MainContext from "../providers/contexts/MainContext";
 
 const StartPage = () => {
   const navigate = useNavigate();
@@ -9,6 +10,7 @@ const StartPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginInfo, setLoginInfo] = useState();
+  const { setHistory } = useContext(MainContext);
 
   const login = (e) => {
     e.preventDefault();
@@ -18,6 +20,9 @@ const StartPage = () => {
       setLoginInfo(false);
     } else if (findUser.password === password) {
       sessionStorage.setItem("loggedInUser", JSON.stringify(findUser));
+      sessionStorage.setItem("component", "");
+      addNewObject("history", { type: "route", value: "/room" });
+      setHistory(getSelectedItems("history"));
       navigate("/room");
       setLoginInfo(true);
     }

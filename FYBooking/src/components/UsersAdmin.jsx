@@ -51,10 +51,6 @@ const UsersAdmin = () => {
     setUsers(getSelectedItems("users"));
   };
 
-  const goBack = () => {
-    setAdminPageDisplay(null);
-  };
-
   return (
     <>
       {formVisibility === true && (
@@ -123,22 +119,34 @@ const UsersAdmin = () => {
       )}
       {formVisibility === false && (
         <>
-          <button className="admin-user-or-room-buttons" onClick={() => setFormVisibility(true)}>Add New User</button>
+          <button
+            className="admin-user-or-room-buttons"
+            onClick={() => setFormVisibility(true)}
+          >
+            Add New User
+          </button>
           <h2 className="user-or-room-display-title">Existing Users</h2>
           {users && (
             <div>
               {users.map((user) => {
                 return (
-                  <div className="user-or-room-display-container" key={user.user_id}>
+                  <div
+                    className="user-or-room-display-container"
+                    key={user.user_id}
+                  >
                     <p className="id-tag">{user.user_id}</p>
                     <h3 className="main-information">{user.username}</h3>
-                    <button className="edit-button" onClick={() => removeUser(user.user_id)}>X</button>
+                    <button
+                      className="edit-button"
+                      onClick={() => removeUser(user.user_id)}
+                    >
+                      X
+                    </button>
                   </div>
                 );
               })}
             </div>
           )}
-          <button className="admin-user-or-room-buttons" onClick={goBack}>Back</button>
         </>
       )}
     </>

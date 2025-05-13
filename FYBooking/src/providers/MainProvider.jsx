@@ -1,14 +1,8 @@
 import MainContext from "./contexts/MainContext";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getSelectedItems } from "../data/db";
 
 const MainProvider = ({ children }) => {
-  const [userPageDisplay, setUserPageDisplay] = useState(null);
-  const [adminPageDisplay, setAdminPageDisplay] = useState(null);
-  const [previousPage, setPreviousPage] = useState(() => {
-    const storedPage = sessionStorage.getItem("previousPage");
-    return storedPage || null;
-  });
   const [selectedDate, setSelectedDate] = useState({});
   const [selectedDateTime, setSelectedDateTime] = useState({});
   const [selectedRoom, setSelectedRoom] = useState("");
@@ -16,23 +10,14 @@ const MainProvider = ({ children }) => {
   const [rooms, setRooms] = useState(getSelectedItems("rooms"));
   const [updateBookings, setUpdateBookings] = useState(false);
   const [isBooked, setIsBooked] = useState(true);
-
-  // Sparar previousPage i sessionStorage ifall en refresh utförs
-  useEffect(() => {
-    if (previousPage) {
-      sessionStorage.setItem("previousPage", previousPage);
-    }
-  }, [previousPage]);
+  const [history, setHistory] = useState(getSelectedItems("history"));
+  const [displayComponent, setDisplayComponent] = useState(
+    sessionStorage.getItem("component")
+  );
 
   return (
     <MainContext.Provider
       value={{
-        userPageDisplay,
-        setUserPageDisplay,
-        adminPageDisplay,
-        setAdminPageDisplay,
-        previousPage,
-        setPreviousPage,
         selectedDate,
         setSelectedDate,
         selectedDateTime,
@@ -47,6 +32,10 @@ const MainProvider = ({ children }) => {
         setUpdateBookings,
         isBooked,
         setIsBooked,
+        history,
+        setHistory,
+        displayComponent,
+        setDisplayComponent,
       }}
     >
       {children}
