@@ -174,6 +174,7 @@
   padding: 0 8px;
   font-size: 16px;
 }
+<<<<<<< Updated upstream
 
 /* Tablet */
 @media (min-width: 768px) and (orientation: landscape) {
@@ -193,3 +194,5 @@
     border-right: 1px solid black;
   }
 }
+=======
+>>>>>>> Stashed changes
