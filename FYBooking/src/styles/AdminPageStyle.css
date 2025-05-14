@@ -174,3 +174,23 @@
   padding: 0 8px;
   font-size: 16px;
 }
+
+/* Tablet */
+@media (min-width: 768px) and (orientation: landscape) {
+  .admin-container {
+    padding: 40px 10px;
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+
+  }
+
+  .admin-component {
+    width:50%;
+    padding: 5%;
+  }
+
+  .admin-component:first-child {
+    border-right: 1px solid black;
+  }
+}

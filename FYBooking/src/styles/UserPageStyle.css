@@ -87,3 +87,34 @@
   padding: 0 8px;
   font-size: 16px;
 }
+
+/* Tablet */
+@media (min-width: 768px) and (orientation: landscape) {
+  .user-container {
+    padding: 40px 10px;
+    display: flex;
+    width: 100vw;
+  }
+
+  .user-component {
+    width: 40%;
+    padding: 1%;
+    border-right: 1px solid black;
+  }
+
+  .user-button-container {
+    width: 15%;
+    padding: 1%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .user-action-button {
+    width: 80%;
+  }
+
+  .user-action-button:first-of-type {
+    margin-top: 0px;
+  }
+}

@@ -14,7 +14,11 @@ const StartPage = () => {
   const { setHistory } = useContext(MainContext);
 
   const isTabletLandscape = useMediaQuery(
-    "(min-width: 768px) and (max-width: 1280px) and (orientation: landscape)"
+    "(min-width: 1024px) and (max-width: 1400px) and (orientation: landscape)"
+  );
+  
+  const isTabletPortrait = useMediaQuery(
+    "(min-width: 768px) and (max-width: 1024px) and (orientation: portrait)"
   );
 
   const login = (e) => {
@@ -25,8 +29,6 @@ const StartPage = () => {
       setLoginInfo(false);
     } else if (findUser.password === password) {
       sessionStorage.setItem("loggedInUser", JSON.stringify(findUser));
-      console.log(findUser);
-
       sessionStorage.setItem("component", "");
       addNewObject("history", { type: "route", value: "/room" });
       setHistory(getSelectedItems("history"));
@@ -46,8 +48,6 @@ const StartPage = () => {
     setHistory(getSelectedItems("history"));
     navigate("/room");
     setLoginInfo(true);
-
-    console.log(guest)
   };
 
   // Creates the first admin account
@@ -92,7 +92,7 @@ const StartPage = () => {
           <p className="wrong-login-info">Username or password is wrong</p>
         )}
       </form>
-      {isTabletLandscape && (
+      {(isTabletLandscape || isTabletPortrait)  && (
         <button className="login-guest-btn" onClick={guestLogin}>Login as guest</button>
       )}
     </>
