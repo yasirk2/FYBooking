@@ -1,10 +1,22 @@
 import { useContext, useEffect, useState } from "react";
 import MainContext from "../providers/contexts/MainContext";
-import { getSelectedItems, addNewObject, deleteObject } from "../data/db";
+import {
+  getSelectedItems,
+  addNewObject,
+  deleteObject,
+  updateObject,
+} from "../data/db";
 import handleChange from "../utils/handleChange";
 
 const UsersAdmin = () => {
   const [formVisibility, setFormVisibility] = useState(false);
+  const [updateMode, setUpdateMode] = useState(false);
+  const [selectedUser, setSelectedUser] = useState({
+    user_id: 0,
+    username: "",
+    password: "",
+    role: "",
+  });
   const [newUserData, setNewUserData] = useState({
     username: "",
     password: "",
@@ -43,12 +55,22 @@ const UsersAdmin = () => {
       password: "",
       role: "client",
     }));
+
+    setFormVisibility(false);
   };
 
   // Function to remove a user
   const removeUser = (index) => {
     deleteObject("users", "user_id", index);
     setUsers(getSelectedItems("users"));
+    setFormVisibility(false);
+  };
+
+  const updateUser = (e) => {
+    e.preventDefault();
+    updateObject("users", selectedUser, "user_id");
+    setUsers(getSelectedItems("users"));
+    setFormVisibility(false);
   };
 
   return (
@@ -57,11 +79,14 @@ const UsersAdmin = () => {
         <div className="admin-add-container">
           <button
             className="exit-button"
-            onClick={() => setFormVisibility(false)}
+            onClick={() => {
+              setFormVisibility(false);
+              setUpdateMode(false);
+            }}
           >
             X
           </button>
-          <form className="add-user-form" onSubmit={createUser}>
+          <form onSubmit={(e) => createUser(e)} className="add-user-form">
             <label className="admin-form-label" htmlFor="new-user-username">
               Username
             </label>
@@ -70,8 +95,12 @@ const UsersAdmin = () => {
               type="text"
               name="username"
               id="new-user-username"
-              onChange={(e) => handleChange(e, setNewUserData)}
-              value={newUserData.username}
+              onChange={(e) => {
+                updateMode
+                  ? handleChange(e, setSelectedUser)
+                  : handleChange(e, setNewUserData);
+              }}
+              value={updateMode ? selectedUser.username : newUserData.username}
               placeholder="Username"
               required
             />
@@ -83,8 +112,12 @@ const UsersAdmin = () => {
               type="password"
               name="password"
               id="new-user-password"
-              onChange={(e) => handleChange(e, setNewUserData)}
-              value={newUserData.password}
+              onChange={(e) => {
+                updateMode
+                  ? handleChange(e, setSelectedUser)
+                  : handleChange(e, setNewUserData);
+              }}
+              value={updateMode ? selectedUser.password : newUserData.password}
               placeholder="Password"
               required
             />
@@ -96,8 +129,16 @@ const UsersAdmin = () => {
                     type="radio"
                     name="role"
                     value="client"
-                    checked={newUserData.role === "client"}
-                    onChange={(e) => handleChange(e, setNewUserData)}
+                    checked={
+                      updateMode
+                        ? selectedUser.role === "client"
+                        : newUserData.role === "client"
+                    }
+                    onChange={(e) => {
+                      updateMode
+                        ? handleChange(e, setSelectedUser)
+                        : handleChange(e, setNewUserData);
+                    }}
                   />
                   Client
                 </label>
@@ -106,14 +147,34 @@ const UsersAdmin = () => {
                     type="radio"
                     name="role"
                     value="admin"
-                    checked={newUserData.role === "admin"}
-                    onChange={(e) => handleChange(e, setNewUserData)}
+                    checked={
+                      updateMode
+                        ? selectedUser.role === "admin"
+                        : newUserData.role === "admin"
+                    }
+                    onChange={(e) => {
+                      updateMode
+                        ? handleChange(e, setSelectedUser)
+                        : handleChange(e, setNewUserData);
+                    }}
                   />
                   Admin
                 </label>
               </div>
             </fieldset>
-            <button type="submit">Create User</button>
+            {updateMode ? (
+              <div>
+                <button onClick={(e) => updateUser(e)}>Update</button>{" "}
+                <button
+                  type="button"
+                  onClick={() => removeUser(selectedUser.user_id)}
+                >
+                  Delete
+                </button>
+              </div>
+            ) : (
+              <button>Create User</button>
+            )}
           </form>
         </div>
       )}
@@ -138,9 +199,18 @@ const UsersAdmin = () => {
                     <h3 className="main-information">{user.username}</h3>
                     <button
                       className="edit-button"
-                      onClick={() => removeUser(user.user_id)}
+                      onClick={() => {
+                        setFormVisibility(true);
+                        setUpdateMode(true);
+                        setSelectedUser({
+                          user_id: user.user_id,
+                          username: user.username,
+                          password: user.password,
+                          role: user.role,
+                        });
+                      }}
                     >
-                      X
+                      <img src="editing.svg" alt="edit" />
                     </button>
                   </div>
                 );

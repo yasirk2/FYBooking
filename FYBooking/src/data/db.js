@@ -24,3 +24,13 @@ export const deleteLatestObject = (selectedItem) => {
   sessionStorage.setItem(selectedItem, JSON.stringify(history));
   return popped;
 };
+
+export const updateObject = (selectedItem, updatedObject, idKey) => {
+  const items = JSON.parse(sessionStorage.getItem(selectedItem) || []);
+
+  const updatedItems = items.map((item) =>
+    item[idKey] === updatedObject[idKey] ? updatedObject : item
+  );
+
+  sessionStorage.setItem(selectedItem, JSON.stringify(updatedItems));
+};

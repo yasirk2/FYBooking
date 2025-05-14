@@ -1,10 +1,23 @@
 import { useContext, useEffect, useState } from "react";
 import MainContext from "../providers/contexts/MainContext";
-import { getSelectedItems, addNewObject, deleteObject } from "../data/db";
+import {
+  getSelectedItems,
+  addNewObject,
+  deleteObject,
+  updateObject,
+} from "../data/db";
 import handleChange from "../utils/handleChange";
 
 const RoomsAdmin = () => {
   const [formVisibility, setFormVisibility] = useState(false);
+  const [updateMode, setUpdateMode] = useState(false);
+  const [selectedRoom, setSelectedRoom] = useState({
+    room_id: 0,
+    room_name: "",
+    slot_duration: 0,
+    start_time: "",
+    end_time: "",
+  });
   const [newRoomData, setNewRoomData] = useState({
     room_name: "",
     slot_duration: 30,
@@ -45,12 +58,22 @@ const RoomsAdmin = () => {
         end_time: "12:00",
       }));
     }
+
+    setFormVisibility(false);
   };
 
   // Function to remove a room
   const removeRoom = (index) => {
     deleteObject("rooms", "room_id", index);
     setRooms(getSelectedItems("rooms"));
+    setFormVisibility(false);
+  };
+
+  const updateRoom = (e) => {
+    e.preventDefault();
+    updateObject("rooms", selectedRoom, "room_id");
+    setRooms(getSelectedItems("rooms"));
+    setFormVisibility(false);
   };
 
   return (
@@ -72,8 +95,14 @@ const RoomsAdmin = () => {
               type="text"
               name="room_name"
               id="room-name"
-              onChange={(e) => handleChange(e, setNewRoomData)}
-              value={newRoomData.room_name}
+              onChange={(e) => {
+                updateMode
+                  ? handleChange(e, setSelectedRoom)
+                  : handleChange(e, setNewRoomData);
+              }}
+              value={
+                updateMode ? selectedRoom.room_name : newRoomData.room_name
+              }
               placeholder="Room Name"
               required
             />
@@ -86,8 +115,16 @@ const RoomsAdmin = () => {
               name="slot_duration"
               id="slot-duration"
               placeholder="60"
-              onChange={(e) => handleChange(e, setNewRoomData)}
-              value={newRoomData.slot_duration}
+              onChange={(e) => {
+                updateMode
+                  ? handleChange(e, setSelectedRoom)
+                  : handleChange(e, setNewRoomData);
+              }}
+              value={
+                updateMode
+                  ? selectedRoom.slot_duration
+                  : newRoomData.slot_duration
+              }
               min={30}
               step={30}
             />
@@ -99,8 +136,16 @@ const RoomsAdmin = () => {
                   id="start-time"
                   name="start_time"
                   placeholder="Start"
-                  onChange={(e) => handleChange(e, setNewRoomData)}
-                  value={newRoomData.start_time}
+                  onChange={(e) => {
+                    updateMode
+                      ? handleChange(e, setSelectedRoom)
+                      : handleChange(e, setNewRoomData);
+                  }}
+                  value={
+                    updateMode
+                      ? selectedRoom.start_time
+                      : newRoomData.start_time
+                  }
                   aria-label="Start time"
                 />
                 <span>-</span>
@@ -109,13 +154,32 @@ const RoomsAdmin = () => {
                   id="end-time"
                   name="end_time"
                   placeholder="End"
-                  onChange={(e) => handleChange(e, setNewRoomData)}
-                  value={newRoomData.end_time}
+                  onChange={(e) => {
+                    updateMode
+                      ? handleChange(e, setSelectedRoom)
+                      : handleChange(e, setNewRoomData);
+                  }}
+                  value={
+                    updateMode ? selectedRoom.end_time : newRoomData.end_time
+                  }
                   aria-label="End time"
                 />
               </div>
             </fieldset>
-            <button type="submit">Create Room</button>
+            {updateMode ? (
+              <div>
+                <button onClick={(e) => updateRoom(e)}>Update</button>{" "}
+                <button
+                  type="button"
+                  onClick={() => removeRoom(selectedRoom.room_id)}
+                >
+                  Delete
+                </button>
+              </div>
+            ) : (
+              <button>Create room</button>
+            )}
+            {/* <button type="submit">Create Room</button> */}
           </form>
         </div>
       )}
@@ -123,7 +187,10 @@ const RoomsAdmin = () => {
         <>
           <button
             className="admin-user-or-room-buttons"
-            onClick={() => setFormVisibility(true)}
+            onClick={() => {
+              setFormVisibility(true);
+              setUpdateMode(false);
+            }}
           >
             Add New Room
           </button>
@@ -145,10 +212,26 @@ const RoomsAdmin = () => {
                     </span>
                     <button
                       className="edit-button"
+                      onClick={() => {
+                        setFormVisibility(true);
+                        setUpdateMode(true);
+                        setSelectedRoom({
+                          room_id: room.room_id,
+                          room_name: room.room_name,
+                          slot_duration: room.slot_duration,
+                          start_time: room.start_time,
+                          end_time: room.end_time,
+                        });
+                      }}
+                    >
+                      <img src="editing.svg" alt="edit" />
+                    </button>
+                    {/* <button
+                      className="edit-button"
                       onClick={() => removeRoom(room.room_id)}
                     >
                       X
-                    </button>
+                    </button> */}
                   </div>
                 );
               })}
