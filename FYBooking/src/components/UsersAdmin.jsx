@@ -163,9 +163,12 @@ const UsersAdmin = () => {
               </div>
             </fieldset>
             {updateMode ? (
-              <div>
-                <button onClick={(e) => updateUser(e)}>Update</button>{" "}
+              <div className="update-remove-btn-div">
+                <button className="update-btn" onClick={(e) => updateUser(e)}>
+                  Update
+                </button>{" "}
                 <button
+                  className="remove-btn"
                   type="button"
                   onClick={() => removeUser(selectedUser.user_id)}
                 >
@@ -173,7 +176,7 @@ const UsersAdmin = () => {
                 </button>
               </div>
             ) : (
-              <button>Create User</button>
+              <button className="create-item-btn">Create User</button>
             )}
           </form>
         </div>

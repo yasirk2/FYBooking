@@ -36,13 +36,14 @@
 
 .admin-add-container form button {
   border-radius: 20px;
-  width: 70%;
   height: 40px;
   margin: auto;
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
-
+.create-item-btn {
+  width: 70%;
+}
 .exit-button {
   border: none;
   background-color: transparent;
@@ -173,6 +174,21 @@
   border-radius: 0px 8px 8px 0px;
   padding: 0 8px;
   font-size: 16px;
+}
+
+.update-remove-btn-div {
+  display: flex;
+  justify-content: space-around;
+}
+
+.update-btn {
+  background-color: #ffeb57;
+  width: 40%;
+}
+
+.remove-btn {
+  background-color: #ffb7b7;
+  width: 40%;
 }
 
 /* Tablet */

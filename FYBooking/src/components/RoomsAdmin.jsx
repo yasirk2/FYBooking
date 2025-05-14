@@ -167,9 +167,12 @@ const RoomsAdmin = () => {
               </div>
             </fieldset>
             {updateMode ? (
-              <div>
-                <button onClick={(e) => updateRoom(e)}>Update</button>{" "}
+              <div className="update-remove-btn-div">
+                <button className="update-btn" onClick={(e) => updateRoom(e)}>
+                  Update
+                </button>{" "}
                 <button
+                  className="remove-btn"
                   type="button"
                   onClick={() => removeRoom(selectedRoom.room_id)}
                 >
@@ -177,7 +180,7 @@ const RoomsAdmin = () => {
                 </button>
               </div>
             ) : (
-              <button>Create room</button>
+              <button className="create-item-btn">Create room</button>
             )}
             {/* <button type="submit">Create Room</button> */}
           </form>
