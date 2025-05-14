@@ -1,12 +1,20 @@
+.start-logo {
+  display: flex;
+  margin: auto;
+  margin-top: 10vh;
+  width: 90px;
+  size: 90px;
+}
+
 .login-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  margin: auto;
+  width: 70%;
 }
 
 .login-form input {
   border-radius: 20px;
-  width: 70%;
   height: 40px;
   padding: 10px;
   margin-bottom: 20px;
@@ -18,7 +26,6 @@
 
 .login-form button {
   border-radius: 20px;
-  width: 70%;
   height: 40px;
 }
 
@@ -26,4 +33,45 @@
   text-align: center;
   padding: 20px;
   color: red;
+}
+
+/* Tablet */
+@media (min-width: 768px) and (orientation: landscape) {
+  .start-logo {
+    width: 140px;
+    height: 140px;
+  }
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 27%;
+  }
+
+  .login-form input {
+    border-radius: calc(15px + 1vw);
+    height: calc(30px + 2vw);
+    padding: 16px;
+    margin-bottom: 30px;
+    font-size: 18px;
+  }
+
+  .login-form button {
+    border-radius: calc(15px + 1vw);
+    height: calc(30px + 2vw);
+    font-size: 18px;
+  }
+
+  .login-guest-btn {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    border-radius: calc(15px + 1vw);
+    height: calc(30px + 2vw);
+    font-size: 18px;
+    width: 27%;
+    background-color: lightblue;
+  }
 }

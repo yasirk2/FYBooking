@@ -3,6 +3,7 @@ import "../styles/StartPageStyle.css";
 import { addNewObject, getSelectedItems } from "../data/db";
 import { useContext, useEffect, useState } from "react";
 import MainContext from "../providers/contexts/MainContext";
+import useMediaQuery from "../utils/useMediaQuery";
 
 const StartPage = () => {
   const navigate = useNavigate();
@@ -12,6 +13,10 @@ const StartPage = () => {
   const [loginInfo, setLoginInfo] = useState();
   const { setHistory } = useContext(MainContext);
 
+  const isTabletLandscape = useMediaQuery(
+    "(min-width: 768px) and (max-width: 1280px) and (orientation: landscape)"
+  );
+
   const login = (e) => {
     e.preventDefault();
     const findUser = users.find((user) => user.username === username);
@@ -20,12 +25,29 @@ const StartPage = () => {
       setLoginInfo(false);
     } else if (findUser.password === password) {
       sessionStorage.setItem("loggedInUser", JSON.stringify(findUser));
+      console.log(findUser);
+
       sessionStorage.setItem("component", "");
       addNewObject("history", { type: "route", value: "/room" });
       setHistory(getSelectedItems("history"));
       navigate("/room");
       setLoginInfo(true);
     }
+  };
+
+  const guestLogin = () => {
+    const guest = {
+      username: "guest",
+      user_id: "guest",
+    }
+    sessionStorage.setItem("loggedInUser", JSON.stringify(guest));
+    sessionStorage.setItem("component", "");
+    addNewObject("history", { type: "route", value: "/room" });
+    setHistory(getSelectedItems("history"));
+    navigate("/room");
+    setLoginInfo(true);
+
+    console.log(guest)
   };
 
   // Creates the first admin account
@@ -46,6 +68,7 @@ const StartPage = () => {
 
   return (
     <>
+      <img className="start-logo" src="../logo.svg" alt="" />
       <h1 className="page-title">FYBooking</h1>
       <form className="login-form" onSubmit={login}>
         <input
@@ -65,9 +88,12 @@ const StartPage = () => {
           placeholder="Password"
         />
         <button type="submit">Login</button>
+        {loginInfo === false && (
+          <p className="wrong-login-info">Username or password is wrong</p>
+        )}
       </form>
-      {loginInfo === false && (
-        <p className="wrong-login-info">Username or password is wrong</p>
+      {isTabletLandscape && (
+        <button className="login-guest-btn" onClick={guestLogin}>Login as guest</button>
       )}
     </>
   );
