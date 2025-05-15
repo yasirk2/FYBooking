@@ -1,18 +1,20 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 
 // Handles conditional rendering depending on mediaQuery
 const useMediaQuery = (query) => {
-  const [matches, setMatches] = useState(() => window.matchMedia(query).matches);
+  const [matches, setMatches] = useState(
+    () => window.matchMedia(query).matches
+  );
 
   useEffect(() => {
-    const media = window.matchMedia(query)
-    const listener = () => setMatches(media.matches)
+    const media = window.matchMedia(query);
+    const listener = () => setMatches(media.matches);
 
-    media.addEventListener("change", listener)
-    return () => media.removeEventListener("change", listener)
-  }, [query])
+    media.addEventListener("change", listener);
+    return () => media.removeEventListener("change", listener);
+  }, [query]);
 
-  return matches
-}
+  return matches;
+};
 
-export default useMediaQuery
+export default useMediaQuery;

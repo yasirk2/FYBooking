@@ -7,4 +7,4 @@ const handleChange = (e, data) => {
   }));
 };
 
-export default handleChange
+export default handleChange;

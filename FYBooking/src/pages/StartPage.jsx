@@ -21,7 +21,6 @@ const StartPage = () => {
     "(min-width: 768px) and (max-width: 1024px) and (orientation: portrait)"
   );
 
-
   const login = (e) => {
     e.preventDefault();
     const findUser = users.find((user) => user.username === username);
@@ -31,11 +30,11 @@ const StartPage = () => {
     } else if (findUser.password === password) {
       sessionStorage.setItem("loggedInUser", JSON.stringify(findUser));
       sessionStorage.setItem("component", "");
-      const selectedRoom = sessionStorage.getItem("selectedRoom")
+      const selectedRoom = sessionStorage.getItem("selectedRoom");
       if (!selectedRoom || selectedRoom.length === 0) {
-        sessionStorage.setItem("selectedRoom", "")
+        sessionStorage.setItem("selectedRoom", "");
       }
-      const tabletConnected = sessionStorage.getItem("tabletRoom") === "true"
+      const tabletConnected = sessionStorage.getItem("tabletRoom") === "true";
       if (tabletConnected) {
         addNewObject("history", { type: "route", value: "/main" });
         navigate("/main");
@@ -77,9 +76,8 @@ const StartPage = () => {
     }
 
     if (isTabletLandscape || isTabletPortrait) {
-      const tablet = getSelectedItems("tabletRoom")
-      if (tablet.length === 0)
-      sessionStorage.setItem("tabletRoom", false);
+      const tablet = getSelectedItems("tabletRoom");
+      if (tablet.length === 0) sessionStorage.setItem("tabletRoom", false);
     }
   }, []);
 
@@ -109,11 +107,12 @@ const StartPage = () => {
           <p className="wrong-login-info">Username or password is wrong</p>
         )}
       </form>
-      {((isTabletLandscape || isTabletPortrait) && sessionStorage.getItem("tabletRoom") === "true") && (
-        <button className="login-guest-btn" onClick={guestLogin}>
-          Login as guest
-        </button>
-      )}
+      {(isTabletLandscape || isTabletPortrait) &&
+        sessionStorage.getItem("tabletRoom") === "true" && (
+          <button className="login-guest-btn" onClick={guestLogin}>
+            Login as guest
+          </button>
+        )}
     </>
   );
 };

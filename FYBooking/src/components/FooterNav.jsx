@@ -47,7 +47,6 @@ const FooterNav = () => {
     navigate("/");
   };
 
-
   return (
     <footer className="page-footer">
       {loggedInUser.user_id !== "guest" && history.length > 1 && (
