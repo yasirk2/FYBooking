@@ -7,10 +7,23 @@ import {
   updateObject,
 } from "../data/db";
 import handleChange from "../utils/handleChange";
+import useMediaQuery from "../utils/useMediaQuery";
+import { useNavigate } from "react-router-dom";
 
 const RoomsAdmin = () => {
+  const navigate = useNavigate();
   const [formVisibility, setFormVisibility] = useState(false);
   const [updateMode, setUpdateMode] = useState(false);
+  const [tempConnected, setTempConnected] = useState(
+    () => sessionStorage.getItem("tabletRoom") === "true"
+  );
+  const [isConnected, setIsConnected] = useState(
+    () => sessionStorage.getItem("tabletRoom") === "true"
+  );
+  const [checkedRoom, setCheckedRoom] = useState(() => {
+    const stored = sessionStorage.getItem("selectedRoom");
+    return stored ? JSON.parse(stored) : { room_id: "" };
+  });
   const [selectedRoom, setSelectedRoom] = useState({
     room_id: 0,
     room_name: "",
@@ -25,9 +38,17 @@ const RoomsAdmin = () => {
     end_time: "12:00",
   });
   const [roomId, setRoomId] = useState(0);
-  const { setAdminPageDisplay, rooms, setRooms } = useContext(MainContext);
+  const { rooms, setRooms } = useContext(MainContext);
 
   let tempOrg = "FYBooking";
+
+  const isTabletLandscape = useMediaQuery(
+    "(min-width: 1024px) and (max-width: 1400px) and (orientation: landscape)"
+  );
+
+  const isTabletPortrait = useMediaQuery(
+    "(min-width: 768px) and (max-width: 1024px) and (orientation: portrait)"
+  );
 
   // Updates RoomId to always be 1 more than the current highest RoomId in sessionStorage
   useEffect(() => {
@@ -74,6 +95,13 @@ const RoomsAdmin = () => {
     updateObject("rooms", selectedRoom, "room_id");
     setRooms(getSelectedItems("rooms"));
     setFormVisibility(false);
+  };
+
+  const logout = () => {
+    sessionStorage.removeItem("loggedInUser");
+    sessionStorage.removeItem("history");
+    sessionStorage.removeItem("component");
+    navigate("/");
   };
 
   return (
@@ -167,22 +195,63 @@ const RoomsAdmin = () => {
               </div>
             </fieldset>
             {updateMode ? (
-              <div className="update-remove-btn-div">
-                <button className="update-btn" onClick={(e) => updateRoom(e)}>
-                  Update
-                </button>{" "}
-                <button
-                  className="remove-btn"
-                  type="button"
-                  onClick={() => removeRoom(selectedRoom.room_id)}
-                >
-                  Delete
-                </button>
-              </div>
+              <>
+                {(isTabletLandscape || isTabletPortrait) && (
+                  <label htmlFor="connect-to-tablet" className="">
+                    <input
+                      type="checkbox"
+                      id="connect-to-tablet"
+                      name="connect_to_tablet"
+                      defaultChecked={
+                        isConnected &&
+                        selectedRoom.room_id === checkedRoom.room_id
+                      }
+                      onClick={(e) => {
+                        setTempConnected(e.target.checked);
+                      }}
+                      disabled={
+                        isConnected &&
+                        selectedRoom.room_id !== checkedRoom.room_id
+                      }
+                    />
+                    Connect this room to tablet
+                  </label>
+                )}
+                <div className="update-remove-btn-div">
+                  <button
+                    className="update-btn"
+                    onClick={(e) => {
+                      updateRoom(e);
+                      if (tempConnected !== isConnected) {
+                        if (tempConnected) {
+                          sessionStorage.setItem(
+                            "selectedRoom",
+                            JSON.stringify(selectedRoom)
+                          );
+                          setCheckedRoom(getSelectedItems("selectedRoom"));
+                        } else if (!tempConnected) {
+                          sessionStorage.setItem("selectedRoom", "");
+                        }
+                        logout();
+                        setIsConnected(tempConnected);
+                        sessionStorage.setItem("tabletRoom", tempConnected);
+                      }
+                    }}
+                  >
+                    Update
+                  </button>{" "}
+                  <button
+                    className="remove-btn"
+                    type="button"
+                    onClick={() => removeRoom(selectedRoom.room_id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </>
             ) : (
               <button className="create-item-btn">Create room</button>
             )}
-            {/* <button type="submit">Create Room</button> */}
           </form>
         </div>
       )}
@@ -224,17 +293,12 @@ const RoomsAdmin = () => {
                           slot_duration: room.slot_duration,
                           start_time: room.start_time,
                           end_time: room.end_time,
+                          organization: tempOrg,
                         });
                       }}
                     >
                       <img src="editing.svg" alt="edit" />
                     </button>
-                    {/* <button
-                      className="edit-button"
-                      onClick={() => removeRoom(room.room_id)}
-                    >
-                      X
-                    </button> */}
                   </div>
                 );
               })}

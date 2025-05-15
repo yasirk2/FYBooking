@@ -1,8 +1,7 @@
-import { useState } from "react";
 import { getSelectedItems } from "../data/db";
 
 const MyProfile = () => {
-  const [user] = useState(getSelectedItems("loggedInUser"));
+  const user = getSelectedItems("loggedInUser");
 
   return (
     <dl className="user-profile-container">

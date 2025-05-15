@@ -16,10 +16,11 @@ const StartPage = () => {
   const isTabletLandscape = useMediaQuery(
     "(min-width: 1024px) and (max-width: 1400px) and (orientation: landscape)"
   );
-  
+
   const isTabletPortrait = useMediaQuery(
     "(min-width: 768px) and (max-width: 1024px) and (orientation: portrait)"
   );
+
 
   const login = (e) => {
     e.preventDefault();
@@ -30,9 +31,19 @@ const StartPage = () => {
     } else if (findUser.password === password) {
       sessionStorage.setItem("loggedInUser", JSON.stringify(findUser));
       sessionStorage.setItem("component", "");
-      addNewObject("history", { type: "route", value: "/room" });
+      const selectedRoom = sessionStorage.getItem("selectedRoom")
+      if (!selectedRoom || selectedRoom.length === 0) {
+        sessionStorage.setItem("selectedRoom", "")
+      }
+      const tabletConnected = sessionStorage.getItem("tabletRoom") === "true"
+      if (tabletConnected) {
+        addNewObject("history", { type: "route", value: "/main" });
+        navigate("/main");
+      } else {
+        addNewObject("history", { type: "route", value: "/room" });
+        navigate("/room");
+      }
       setHistory(getSelectedItems("history"));
-      navigate("/room");
       setLoginInfo(true);
     }
   };
@@ -41,12 +52,12 @@ const StartPage = () => {
     const guest = {
       username: "guest",
       user_id: "guest",
-    }
+    };
     sessionStorage.setItem("loggedInUser", JSON.stringify(guest));
     sessionStorage.setItem("component", "");
-    addNewObject("history", { type: "route", value: "/room" });
+    addNewObject("history", { type: "route", value: "/main" });
     setHistory(getSelectedItems("history"));
-    navigate("/room");
+    navigate("/main");
     setLoginInfo(true);
   };
 
@@ -63,6 +74,12 @@ const StartPage = () => {
       };
       addNewObject("users", adminUser);
       setUsers(getSelectedItems("users"));
+    }
+
+    if (isTabletLandscape || isTabletPortrait) {
+      const tablet = getSelectedItems("tabletRoom")
+      if (tablet.length === 0)
+      sessionStorage.setItem("tabletRoom", false);
     }
   }, []);
 
@@ -92,8 +109,10 @@ const StartPage = () => {
           <p className="wrong-login-info">Username or password is wrong</p>
         )}
       </form>
-      {(isTabletLandscape || isTabletPortrait)  && (
-        <button className="login-guest-btn" onClick={guestLogin}>Login as guest</button>
+      {((isTabletLandscape || isTabletPortrait) && sessionStorage.getItem("tabletRoom") === "true") && (
+        <button className="login-guest-btn" onClick={guestLogin}>
+          Login as guest
+        </button>
       )}
     </>
   );

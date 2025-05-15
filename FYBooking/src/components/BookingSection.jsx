@@ -4,16 +4,16 @@ import MainContext from "../providers/contexts/MainContext";
 import { getSelectedItems } from "../data/db";
 
 const BookingSection = () => {
-  const {
-    selectedDate,
-    setSelectedDateTime,
-    setDateModuleVisibility,
-    updateBookings,
-    setIsBooked,
-  } = useContext(MainContext);
-  const [selectedRoom] = useState(
-    JSON.parse(sessionStorage.getItem("selectedRoom"))
-  );
+  const { selectedDate, setDateModuleVisibility, updateBookings, setIsBooked } =
+    useContext(MainContext);
+  const [selectedRoom] = useState(() => {
+    const stored = sessionStorage.getItem("selectedRoom");
+    try {
+      return stored ? JSON.parse(stored) : null;
+    } catch {
+      return null;
+    }
+  });
   const [timeSlots, setTimeSlots] = useState(null);
   const startTime = selectedRoom.start_time;
   const endTime = selectedRoom.end_time;
@@ -74,6 +74,7 @@ const BookingSection = () => {
           }
           const checkBookings = bookings.some(
             (booking) =>
+              booking.room_id === selectedRoom.room_id &&
               booking.dayName === selectedDate.dayName &&
               booking.date === selectedDate.date &&
               booking.month === selectedDate.month &&
@@ -98,9 +99,7 @@ const BookingSection = () => {
                 setDateModuleVisibility(true);
               }}
               className={
-                checkBookings
-                  ? `booking-slot unavailable`
-                  : `booking-slot`
+                checkBookings ? `booking-slot unavailable` : `booking-slot`
               }
               key={index}
             >

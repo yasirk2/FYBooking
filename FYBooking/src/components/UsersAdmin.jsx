@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-import MainContext from "../providers/contexts/MainContext";
+import { useEffect, useState } from "react";
 import {
   getSelectedItems,
   addNewObject,
@@ -16,6 +15,7 @@ const UsersAdmin = () => {
     username: "",
     password: "",
     role: "",
+    organization: "",
   });
   const [newUserData, setNewUserData] = useState({
     username: "",
@@ -24,7 +24,6 @@ const UsersAdmin = () => {
   });
   const [userId, setUserId] = useState(0);
   const [users, setUsers] = useState(getSelectedItems("users"));
-  const { setAdminPageDisplay } = useContext(MainContext);
 
   let tempOrg = "FYBooking";
 
@@ -39,7 +38,6 @@ const UsersAdmin = () => {
   // Function that creates the new user
   const createUser = (e) => {
     e.preventDefault();
-
     const newUser = {
       ...newUserData,
       organization: tempOrg,
@@ -79,10 +77,7 @@ const UsersAdmin = () => {
         <div className="admin-add-container">
           <button
             className="exit-button"
-            onClick={() => {
-              setFormVisibility(false);
-              setUpdateMode(false);
-            }}
+            onClick={() => setFormVisibility(false)}
           >
             X
           </button>
@@ -185,7 +180,10 @@ const UsersAdmin = () => {
         <>
           <button
             className="admin-user-or-room-buttons"
-            onClick={() => setFormVisibility(true)}
+            onClick={() => {
+              setFormVisibility(true);
+              setUpdateMode(false);
+            }}
           >
             Add New User
           </button>
@@ -210,6 +208,7 @@ const UsersAdmin = () => {
                           username: user.username,
                           password: user.password,
                           role: user.role,
+                          organization: tempOrg,
                         });
                       }}
                     >

@@ -9,11 +9,14 @@ const FooterNav = () => {
     useContext(MainContext);
   const currentPage = history[history.length - 1];
   const previousPage = history[history.length - 2];
+  const loggedInUser = getSelectedItems("loggedInUser");
+  const connected = getSelectedItems("tabletRoom");
 
   const handleBack = () => {
     if (currentPage.type === "route" && previousPage.type === "route") {
       if (currentPage.value === "/main") {
         setDateModuleVisibility(false);
+        sessionStorage.setItem("selectedRoom", "");
       }
       navigate(previousPage.value);
       deleteLatestObject("history");
@@ -37,13 +40,29 @@ const FooterNav = () => {
     setHistory(getSelectedItems("history"));
   };
 
+  const logout = () => {
+    sessionStorage.removeItem("loggedInUser");
+    sessionStorage.removeItem("history");
+    sessionStorage.removeItem("component");
+    navigate("/");
+  };
+
+
   return (
     <footer className="page-footer">
-      {history.length > 1 && <button onClick={handleBack}>Back</button>}
+      {loggedInUser.user_id !== "guest" && history.length > 1 && (
+        <button onClick={handleBack}>Back</button>
+      )}
       {(currentPage.value === "/room" ||
+        (currentPage.value === "/main" && connected === true) ||
         (currentPage.value === "/main" && previousPage.value === "/room")) && (
-        <button className="user-button" onClick={navigateToUserPage}>
-          UserButton
+        <button
+          className="user-button"
+          onClick={
+            loggedInUser.user_id === "guest" ? logout : navigateToUserPage
+          }
+        >
+          {loggedInUser.user_id === "guest" ? "Logout" : "UserButton"}
         </button>
       )}
     </footer>
