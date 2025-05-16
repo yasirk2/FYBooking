@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import "../styles/MainPageStyle.css";
 import MainContext from "../providers/contexts/MainContext";
 import { getSelectedItems } from "../data/db";
+import useMediaQuery from "../utils/useMediaQuery";
 
 const BookingSection = () => {
   const { selectedDate, setDateModuleVisibility, updateBookings, setIsBooked } =
@@ -19,8 +20,8 @@ const BookingSection = () => {
   const endTime = selectedRoom.end_time;
   const intervall = Number(selectedRoom.slot_duration);
   const [bookings, setBookings] = useState(null);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [days, setDays] = useState(JSON.parse(sessionStorage.getItem("days")));
+  const isTablet = useMediaQuery("(min-width: 768px)");
 
   //   generates timeSlots.
   const generateIntervall = (startTime, endTime, intervall) => {
@@ -32,7 +33,7 @@ const BookingSection = () => {
 
     // The variables contains the total minutes from midnight/amount total time in minutes
     const startTotalMinutes = startHour * 60 + startMin;
-    const endTotalMinutes = endHour * 60 + endMin + intervall;
+    const endTotalMinutes = endHour * 60 + endMin;
 
     //uses starttime, endtime and intervall to generate the right amount of timeslots
     for (
@@ -66,26 +67,23 @@ const BookingSection = () => {
     setBookings(getSelectedItems("bookings"));
   }, [selectedDate, updateBookings]);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    console.log(windowWidth);
-    console.log(JSON.parse(sessionStorage.getItem("days")));
-  }, [windowWidth]);
+  const selectDateTimeForDateModule = (chosenData, timeSlot, endTime) => {
+    sessionStorage.setItem(
+      "setSelectedDateTime",
+      JSON.stringify({
+        date: chosenData.date,
+        dayFullName: chosenData.dayFullName,
+        dayName: chosenData.dayName,
+        month: chosenData.month,
+        startTime: timeSlot,
+        endTime: endTime,
+      })
+    );
+  };
 
   return (
     <div className="lower-main-page">
-      {windowWidth > 768 ? (
+      {isTablet ? (
         <div className="lower-main-page-tablet">
           {timeSlots !== null &&
             timeSlots[1].map((timeSlot, index) => {
@@ -93,6 +91,7 @@ const BookingSection = () => {
               if (index === timeSlots[1].length - 1) {
                 return null;
               }
+
               return (
                 <div className="tablet-timeslots" key={index}>
                   <div className="tablet-timeslot-p-div">
@@ -100,12 +99,36 @@ const BookingSection = () => {
                   </div>
                   <div className="tablet-timeslots-days-outer-div">
                     {days.length > 1 &&
-                      days.map((day, index) => (
-                        <div
-                          className="tablet-timeslots-days"
-                          key={index}
-                        ></div>
-                      ))}
+                      days.map((day, index) => {
+                        const checkBookings = bookings.some(
+                          (booking) =>
+                            booking.room_id === selectedRoom.room_id &&
+                            booking.dayName === day.dayName &&
+                            booking.date === day.date &&
+                            booking.month === day.month &&
+                            booking.start_time === timeSlot
+                        );
+
+                        return (
+                          <div
+                            className={
+                              checkBookings
+                                ? `tablet-timeslots-days unavailable`
+                                : `tablet-timeslots-days`
+                            }
+                            key={index}
+                            onClick={() => {
+                              selectDateTimeForDateModule(
+                                day,
+                                timeSlot,
+                                endTime
+                              );
+                              setDateModuleVisibility(true);
+                              setIsBooked(checkBookings);
+                            }}
+                          ></div>
+                        );
+                      })}
                   </div>
                 </div>
               );
@@ -130,17 +153,7 @@ const BookingSection = () => {
           return (
             <div
               onClick={() => {
-                sessionStorage.setItem(
-                  "setSelectedDateTime",
-                  JSON.stringify({
-                    date: selectedDate.date,
-                    dayFullName: selectedDate.dayFullName,
-                    dayName: selectedDate.dayName,
-                    month: selectedDate.month,
-                    startTime: timeSlot,
-                    endTime: endTime,
-                  })
-                );
+                selectDateTimeForDateModule(selectedDate, timeSlot, endTime);
                 setIsBooked(checkBookings);
                 setDateModuleVisibility(true);
               }}

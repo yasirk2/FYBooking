@@ -1,12 +1,14 @@
 import MainContext from "../providers/contexts/MainContext";
 import "../styles/MainPageStyle.css";
 import { useContext, useEffect, useState } from "react";
+import useMediaQuery from "../utils/useMediaQuery";
 
 const Schedule = () => {
   const [days, setDays] = useState([]);
   const [months, setMonths] = useState([]);
   const [weekDays, setWeekDays] = useState(0);
   const { selectedDate, setSelectedDate } = useContext(MainContext);
+  const isTablet = useMediaQuery("(min-width: 768px)");
 
   // getCalender handles the calender and weekDays adds or subracts the amount of days is should show
   const getCalendar = (weekDays) => {
@@ -91,7 +93,9 @@ const Schedule = () => {
                 }));
               }}
               className={`day-date-div ${
-                selectedDate.date === day.date ? "selected-date" : ""
+                !isTablet && selectedDate.date === day.date
+                  ? "selected-date"
+                  : ""
               }`}
               key={index}
             >
