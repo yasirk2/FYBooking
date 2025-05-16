@@ -87,7 +87,9 @@
 
 .lower-main-page-tablet {
   width: 100vw;
-  height: 400px;
+  height: 60vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .tablet-timeslots {
@@ -124,7 +126,7 @@
   .upper-main-page {
     width: 87%;
     margin-left: 10%;
-    margin-right: 3%;
+    margin-right: 4%;
   }
 
   .days-div {
