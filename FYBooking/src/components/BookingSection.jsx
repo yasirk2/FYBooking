@@ -20,7 +20,7 @@ const BookingSection = () => {
   const endTime = selectedRoom.end_time;
   const intervall = Number(selectedRoom.slot_duration);
   const [bookings, setBookings] = useState(null);
-  const [days, setDays] = useState(JSON.parse(sessionStorage.getItem("days")));
+  const days = JSON.parse(sessionStorage.getItem("days"));
   const isTablet = useMediaQuery("(min-width: 768px)");
 
   //   generates timeSlots.
