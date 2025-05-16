@@ -40,6 +40,7 @@ const Schedule = () => {
       }
       setMonths(differentMonths);
     }
+    sessionStorage.setItem("days", JSON.stringify(dayList));
     setDays(dayList);
   };
 
@@ -58,6 +59,8 @@ const Schedule = () => {
       }));
     }
   }, [days]);
+
+  useEffect(() => {}, [days]);
 
   return (
     <div className="upper-main-page">

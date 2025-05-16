@@ -2,7 +2,6 @@
   display: flex;
   height: 30vh;
   justify-content: space-evenly;
-  
 }
 
 .upper-main-page {
@@ -84,4 +83,75 @@
 
 .booking-slot:last-child {
   margin-bottom: 42px;
+}
+
+.lower-main-page-tablet {
+  width: 100vw;
+  height: 400px;
+}
+
+.tablet-timeslots {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  height: 10%;
+  margin-left: 1%;
+}
+
+.tablet-timeslot-p-div {
+  width: 7%;
+  border-top: solid 1px black;
+  text-align: center;
+}
+
+.tablet-timeslot-p-div p {
+  font-size: larger;
+}
+
+.tablet-timeslots-days-outer-div {
+  width: 86%;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 4.5%;
+}
+
+.tablet-timeslots-days {
+  border-top: solid black 1px;
+  width: 10%;
+}
+
+@media (min-width: 768px) and (orientation: landscape) {
+  .upper-main-page {
+    width: 87%;
+    margin-left: 10%;
+    margin-right: 3%;
+  }
+
+  .days-div {
+    justify-content: space-between;
+  }
+  .week-div {
+    justify-content: space-between;
+  }
+  .day-date-div {
+    width: 10%;
+  }
+}
+
+@media (min-width: 768px) and (orientation: portrait) {
+  .upper-main-page {
+    width: 87%;
+    margin-left: 10%;
+    margin-right: 3%;
+  }
+
+  .days-div {
+    justify-content: space-between;
+  }
+  .week-div {
+    justify-content: space-between;
+  }
+  .day-date-div {
+    width: 10%;
+  }
 }

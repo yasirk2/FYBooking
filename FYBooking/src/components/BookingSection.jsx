@@ -19,6 +19,8 @@ const BookingSection = () => {
   const endTime = selectedRoom.end_time;
   const intervall = Number(selectedRoom.slot_duration);
   const [bookings, setBookings] = useState(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [days, setDays] = useState(JSON.parse(sessionStorage.getItem("days")));
 
   //   generates timeSlots.
   const generateIntervall = (startTime, endTime, intervall) => {
@@ -64,9 +66,53 @@ const BookingSection = () => {
     setBookings(getSelectedItems("bookings"));
   }, [selectedDate, updateBookings]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log(windowWidth);
+    console.log(JSON.parse(sessionStorage.getItem("days")));
+  }, [windowWidth]);
+
   return (
     <div className="lower-main-page">
-      {timeSlots !== null &&
+      {windowWidth > 768 ? (
+        <div className="lower-main-page-tablet">
+          {timeSlots !== null &&
+            timeSlots[1].map((timeSlot, index) => {
+              const endTime = timeSlots[1][index + 1];
+              if (index === timeSlots[1].length - 1) {
+                return null;
+              }
+              return (
+                <div className="tablet-timeslots" key={index}>
+                  <div className="tablet-timeslot-p-div">
+                    <p>{timeSlot}</p>
+                  </div>
+                  <div className="tablet-timeslots-days-outer-div">
+                    {days.length > 1 &&
+                      days.map((day, index) => (
+                        <div
+                          className="tablet-timeslots-days"
+                          key={index}
+                        ></div>
+                      ))}
+                  </div>
+                </div>
+              );
+            })}
+        </div>
+      ) : (
+        timeSlots !== null &&
         timeSlots[1].map((timeSlot, index) => {
           const endTime = timeSlots[1][index + 1];
           if (index === timeSlots[1].length - 1) {
@@ -106,7 +152,8 @@ const BookingSection = () => {
               <p>{timeSlot}</p>
             </div>
           );
-        })}
+        })
+      )}
     </div>
   );
 };
