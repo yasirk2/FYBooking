@@ -16,7 +16,7 @@ const RoomPage = () => {
   };
 
   return (
-    <>
+    <div className="web-app-container">
       <h1 className="page-title">Choose Room</h1>
       <div className="room-list">
         {rooms && (
@@ -43,7 +43,7 @@ const RoomPage = () => {
         )}
       </div>
       <FooterNav />
-    </>
+    </div>
   );
 };
 

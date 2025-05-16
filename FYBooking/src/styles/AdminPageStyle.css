@@ -143,6 +143,10 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
+.user-or-room-display-container:last-of-type {
+  margin-bottom: calc(10vh + 24px);
+}
+
 .id-tag {
   display: flex;
   align-items: center;
@@ -198,6 +202,15 @@
     display: flex;
     width: 100vw;
     justify-content: center;
+  }
+
+  .users-rooms-main-container {
+    height: 40vh;
+    overflow-y: auto;
+  }
+
+  .user-or-room-display-container:last-of-type {
+    margin-bottom: 0;
   }
 
   .admin-component {

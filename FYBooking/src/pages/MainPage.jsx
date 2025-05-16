@@ -10,7 +10,7 @@ const MainPage = () => {
   const { dateModuleVisibility } = useContext(MainContext);
 
   return (
-    <div className="main-page">
+    <div className="web-app-container">
       <div className="main-section-container">
         <Schedule />
       </div>

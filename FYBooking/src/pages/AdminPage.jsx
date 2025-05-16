@@ -21,7 +21,7 @@ const AdminPage = () => {
   };
 
   return (
-    <>
+    <div className="web-app-container">
       {isNotPhone ? (
         <>
           <h1 className="page-title">Admin Panel</h1>
@@ -71,7 +71,7 @@ const AdminPage = () => {
       )}
 
       <FooterNav />
-    </>
+    </div>
   );
 };
 

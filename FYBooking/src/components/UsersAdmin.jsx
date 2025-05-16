@@ -189,7 +189,7 @@ const UsersAdmin = () => {
           </button>
           <h2 className="user-or-room-display-title">Existing Users</h2>
           {users && (
-            <div>
+            <div className="users-rooms-main-container">
               {users.map((user) => {
                 return (
                   <div

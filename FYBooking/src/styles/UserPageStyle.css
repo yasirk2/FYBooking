@@ -53,6 +53,10 @@
   margin-top: 40px;
 }
 
+.booking-container:last-of-type {
+  margin-bottom: calc(10vh + 12px);
+}
+
 .date-tag {
   display: flex;
   align-items: center;
@@ -95,11 +99,28 @@
     display: flex;
     width: 100vw;
   }
-
+  
   .user-component {
     width: 40%;
     padding: 1%;
     border-right: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+  }
+  
+  .my-booking-main-container {
+    margin-top: 24px;
+    flex: 1 1 auto; 
+    overflow-y: auto;
+  }
+
+  .booking-container:first-of-type {
+    margin-top: 0;
+  }
+
+  .booking-container:last-of-type {
+    margin-bottom: 0;
   }
 
   .user-button-container {
@@ -116,5 +137,19 @@
 
   .user-action-button:first-of-type {
     margin-top: 0px;
+  }
+}
+
+@media (min-width: 768px) and (orientation: portrait) {
+  .user-button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: calc(10vh + 12px);
+  }
+
+  .booking-container:last-of-type {
+    margin-bottom: 2px;
   }
 }

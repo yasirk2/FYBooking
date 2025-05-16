@@ -82,7 +82,7 @@
 }
 
 .booking-slot:last-child {
-  margin-bottom: 42px;
+  margin-bottom: calc(10vh + 4px);
 }
 
 .lower-main-page-tablet {

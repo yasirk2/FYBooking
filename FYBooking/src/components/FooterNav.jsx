@@ -50,18 +50,20 @@ const FooterNav = () => {
   return (
     <footer className="page-footer">
       {loggedInUser.user_id !== "guest" && history.length > 1 && (
-        <button onClick={handleBack}>Back</button>
+        <button className="footer-back-button" onClick={handleBack}>
+          <img alt="arrow back" className="footer-back-button-image" src="/Arrowback.svg"/>
+        </button>
       )}
       {(currentPage.value === "/room" ||
         (currentPage.value === "/main" && connected === true) ||
         (currentPage.value === "/main" && previousPage.value === "/room")) && (
         <button
-          className="user-button"
+          className="to-user-page-button"
           onClick={
             loggedInUser.user_id === "guest" ? logout : navigateToUserPage
           }
         >
-          {loggedInUser.user_id === "guest" ? "Logout" : "UserButton"}
+          {loggedInUser.user_id === "guest" ? "Logout" : <img src="/user.png" alt="profile button" className="user-button-image" />}
         </button>
       )}
     </footer>

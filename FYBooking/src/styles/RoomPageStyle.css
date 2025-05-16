@@ -19,6 +19,10 @@
   margin-top: 40px;
 }
 
+.room-button:last-of-type {
+  margin-bottom: calc(10vh + 12px);
+}
+
 .user-button {
   margin-right: 10px;
 }

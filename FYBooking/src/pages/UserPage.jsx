@@ -37,7 +37,7 @@ const UserPage = () => {
   };
 
   return (
-    <>
+    <div className="user-page-main-container">
       {isNotPhone ? (
         <>
           <h1 className="page-title">{loggedInUser.username}</h1>
@@ -48,7 +48,9 @@ const UserPage = () => {
             </div>
             <div className="user-component">
               <h2 className="page-title">My Bookings</h2>
-              <MyBookings />
+              <div className="my-booking-main-container">
+                <MyBookings />
+              </div>
             </div>
             <div className="user-button-container">
               {loggedInUser.role === "admin" && (
@@ -111,7 +113,7 @@ const UserPage = () => {
       )}
 
       <FooterNav />
-    </>
+    </div>
   );
 };
 

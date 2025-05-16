@@ -268,7 +268,7 @@ const RoomsAdmin = () => {
           </button>
           <h2 className="user-or-room-display-title">Existing Rooms</h2>
           {rooms && (
-            <div>
+            <div className="users-rooms-main-container">
               {rooms.map((room) => {
                 return (
                   <div
