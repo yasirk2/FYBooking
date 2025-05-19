@@ -13,15 +13,16 @@
   border: black solid 1px;
   border-radius: 20px;
   margin-bottom: 20px;
+  background-color: white;
 }
 
 .user-action-button:first-of-type {
   margin-top: 40px;
 }
 
-.user-profile-container{
+.user-profile-container {
   margin-top: 20px;
-  padding: 20px
+  padding: 20px;
 }
 
 .user-profile-label {
@@ -99,7 +100,7 @@
     display: flex;
     width: 100vw;
   }
-  
+
   .user-component {
     width: 40%;
     padding: 1%;
@@ -108,10 +109,10 @@
     flex-direction: column;
     height: 70vh;
   }
-  
+
   .my-booking-main-container {
     margin-top: 24px;
-    flex: 1 1 auto; 
+    flex: 1 1 auto;
     overflow-y: auto;
   }
 

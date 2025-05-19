@@ -13,6 +13,7 @@
   border: black solid 1px;
   border-radius: 20px;
   margin-bottom: 20px;
+  background-color: white;
 }
 
 .admin-action-button:first-of-type {
@@ -43,6 +44,7 @@
 }
 .create-item-btn {
   width: 70%;
+  background-color: white;
 }
 .exit-button {
   border: none;
@@ -111,6 +113,7 @@
   border-radius: 20px;
   margin-left: auto;
   margin-right: auto;
+  background-color: white;
 }
 
 .admin-user-or-room-buttons:first-of-type {

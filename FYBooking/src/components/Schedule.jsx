@@ -112,7 +112,7 @@ const Schedule = () => {
           <img src="/Arrowback.svg" alt="arrow back" className="arrow-icon" />
         </button>
         <button
-          style={{ borderBottom: "solid 1px black" }}
+          style={{ borderBottom: "solid 2px black" }}
           className="week-btn"
           onClick={() => setWeekDays(0)}
         >

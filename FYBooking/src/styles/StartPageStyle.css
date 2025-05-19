@@ -27,6 +27,7 @@
 .login-form button {
   border-radius: 20px;
   height: 40px;
+  background-color: white;
 }
 
 .wrong-login-info {

@@ -25,7 +25,7 @@
 .month-h2 {
   font-size: 28px;
   font-weight: bold;
-  border-bottom: solid 1px black;
+  border-bottom: solid 2px black;
   display: inline-block;
 }
 
@@ -47,7 +47,10 @@
   padding: 10px;
   padding-top: 15px;
   padding-bottom: 15px;
-  border-bottom: solid 1px black;
+  border-bottom: solid 2px black;
+  font-size: larger;
+
+  font-weight: 500;
 }
 
 .day-name-p {
@@ -55,7 +58,7 @@
 }
 
 .selected-date {
-  border: solid 1px black;
+  border: solid 2px black;
   border-radius: 5px;
 }
 
@@ -68,13 +71,16 @@
   border: none;
   background-color: white;
   padding: 5px;
+  font-size: larger;
 }
 
 .booking-slot {
-  border-top: solid 1px black;
+  border-top: solid 2px black;
   flex: 1;
   width: 95%;
   min-height: 46px;
+  font-size: larger;
+  font-weight: 500;
 }
 
 .unavailable {
@@ -102,8 +108,10 @@
 
 .tablet-timeslot-p-div {
   width: 7%;
-  border-top: solid 1px black;
+  border-top: solid 2px black;
   text-align: center;
+  font-size: larger;
+  font-weight: 500;
 }
 
 .tablet-timeslot-p-div p {
@@ -118,7 +126,7 @@
 }
 
 .tablet-timeslots-days {
-  border-top: solid black 1px;
+  border-top: solid black 2px;
   width: 10%;
 }
 

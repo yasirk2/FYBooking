@@ -84,7 +84,6 @@ const StartPage = () => {
   return (
     <>
       <img className="start-logo" src="../logo.svg" alt="" />
-      <h1 className="page-title">FYBooking</h1>
       <form className="login-form" onSubmit={login}>
         <input
           value={username}

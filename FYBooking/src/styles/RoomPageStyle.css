@@ -13,6 +13,7 @@
   border: black solid 1px;
   border-radius: 20px;
   margin-bottom: 20px;
+  background-color: white;
 }
 
 .room-button:first-of-type {
@@ -25,4 +26,12 @@
 
 .user-button {
   margin-right: 10px;
+}
+
+@media (min-width: 768px) and (orientation: landscape) {
+  .room-button {
+    border-radius: calc(15px + 1vw);
+    height: calc(30px + 2vw);
+    font-size: 18px;
+  }
 }
