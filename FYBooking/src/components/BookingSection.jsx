@@ -82,7 +82,7 @@ const BookingSection = () => {
   };
 
   return (
-    <div className="lower-main-page">
+    <main className="lower-main-page">
       {isTablet ? (
         <div className="lower-main-page-tablet">
           {timeSlots !== null &&
@@ -167,7 +167,7 @@ const BookingSection = () => {
           );
         })
       )}
-    </div>
+    </main>
   );
 };
 

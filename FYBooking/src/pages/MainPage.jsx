@@ -11,9 +11,9 @@ const MainPage = () => {
 
   return (
     <div className="web-app-container">
-      <div className="main-section-container">
+      <header className="main-section-container">
         <Schedule />
-      </div>
+      </header>
       <BookingSection />
       {dateModuleVisibility === true && <DateModule />}
       <FooterNav />
