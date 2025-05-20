@@ -62,6 +62,8 @@ const Schedule = () => {
     }
   }, [days]);
 
+  // Tag changes from div to button depending on the screensize.
+  // this is so that the screenreader does not read som tags that should not be read in som cases
   const Tag = isTablet ? "div" : "button";
   return (
     <div className="upper-main-page">

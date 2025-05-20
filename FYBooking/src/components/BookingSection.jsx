@@ -125,7 +125,6 @@ const BookingSection = () => {
                               );
                               setDateModuleVisibility(true);
                               setIsBooked(checkBookings);
-                              console.log(day);
                             }}
                             aria-label={`select timeslot ${day.dayFullName} the ${day.date} in ${day.month} between ${timeSlot} and ${endTime}`}
                           ></button>
@@ -163,7 +162,7 @@ const BookingSection = () => {
                 checkBookings ? `booking-slot unavailable` : `booking-slot`
               }
               key={index}
-              aria-label={`Book timeslot between ${timeSlot} and ${endTime}`}
+              aria-label={`Select timeslot between ${timeSlot} and ${endTime}`}
             >
               <p>{timeSlot}</p>
             </button>

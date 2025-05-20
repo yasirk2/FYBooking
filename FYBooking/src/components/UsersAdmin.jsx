@@ -78,6 +78,7 @@ const UsersAdmin = () => {
           <button
             className="exit-button"
             onClick={() => setFormVisibility(false)}
+            aria-label="Close create user"
           >
             X
           </button>
@@ -211,6 +212,7 @@ const UsersAdmin = () => {
                           organization: tempOrg,
                         });
                       }}
+                      aria-label={`Edit the user ${user.username}`}
                     >
                       <img src="editing.svg" alt="edit" />
                     </button>

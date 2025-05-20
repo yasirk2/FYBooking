@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import "../styles/DateModuleStyle.css";
 import MainContext from "../providers/contexts/MainContext";
 import { addNewObject, getSelectedItems } from "../data/db";
@@ -10,6 +10,14 @@ const DateModule = () => {
     setUpdateBookings,
     isBooked,
   } = useContext(MainContext);
+
+  const dialogRef = useRef(null);
+
+  useEffect(() => {
+    if (dialogRef.current) {
+      dialogRef.current.focus();
+    }
+  });
 
   const [selectedDateTime] = useState(
     JSON.parse(sessionStorage.getItem("setSelectedDateTime"))
@@ -54,11 +62,19 @@ const DateModule = () => {
     addNewObject("bookings", newBooking);
   };
   return (
-    <div className="date-module-div">
+    <div
+      className="date-module-div"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="date-module"
+      ref={dialogRef}
+      tabIndex={-1}
+    >
       {!isBooked && (
         <button
           onClick={() => setDateModuleVisibility(false)}
           className="date-module-close-btn"
+          aria-label="close module"
         >
           X
         </button>

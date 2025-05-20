@@ -111,6 +111,7 @@ const RoomsAdmin = () => {
           <button
             className="exit-button"
             onClick={() => setFormVisibility(false)}
+            aria-label="Close create room"
           >
             X
           </button>
@@ -296,6 +297,7 @@ const RoomsAdmin = () => {
                           organization: tempOrg,
                         });
                       }}
+                      aria-label={`Edit the room ${room.room_name}`}
                     >
                       <img src="editing.svg" alt="edit" />
                     </button>
