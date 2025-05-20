@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "../styles/RoomPageStyle.css";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import MainContext from "../providers/contexts/MainContext";
 import FooterNav from "../components/FooterNav";
 import { addNewObject, getSelectedItems } from "../data/db";
@@ -18,8 +18,8 @@ const RoomPage = () => {
   return (
     <div className="web-app-container">
       <h1 className="page-title">Choose Room</h1>
-      <div className="room-list">
-        {rooms && (
+      <div className="room-list" role="list">
+        {rooms.length > 0 ? (
           <>
             {rooms.map((room) => {
               return (
@@ -40,6 +40,8 @@ const RoomPage = () => {
               );
             })}
           </>
+        ) : (
+          <h3>No rooms added</h3>
         )}
       </div>
       <FooterNav />

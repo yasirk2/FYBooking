@@ -83,16 +83,23 @@ const StartPage = () => {
 
   return (
     <>
-      <img className="start-logo" src="../logo.svg" alt="" />
-      <form className="login-form" onSubmit={login}>
+      <img className="start-logo" src="../logo.svg" alt="FYBooking logo" />
+      <form className="login-form" role="form" onSubmit={login}>
+        <label htmlFor="username" className="sr-only">
+          {" "}
+          Username
+        </label>
         <input
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           type="text"
-          id="name"
-          name="name"
+          id="username"
+          name="username"
           placeholder="Username"
         />
+        <label htmlFor="password" className="sr-only">
+          Password
+        </label>
         <input
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -103,12 +110,18 @@ const StartPage = () => {
         />
         <button type="submit">Login</button>
         {loginInfo === false && (
-          <p className="wrong-login-info">Username or password is wrong</p>
+          <p aria-live="polite" className="wrong-login-info">
+            Username or password is wrong
+          </p>
         )}
       </form>
       {(isTabletLandscape || isTabletPortrait) &&
         sessionStorage.getItem("tabletRoom") === "true" && (
-          <button className="login-guest-btn" onClick={guestLogin}>
+          <button
+            aria-label="log in as guest"
+            className="login-guest-btn"
+            onClick={guestLogin}
+          >
             Login as guest
           </button>
         )}

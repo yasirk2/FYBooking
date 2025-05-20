@@ -110,7 +110,7 @@ const BookingSection = () => {
                         );
 
                         return (
-                          <div
+                          <button
                             className={
                               checkBookings
                                 ? `tablet-timeslots-days unavailable`
@@ -125,8 +125,10 @@ const BookingSection = () => {
                               );
                               setDateModuleVisibility(true);
                               setIsBooked(checkBookings);
+                              console.log(day);
                             }}
-                          ></div>
+                            aria-label={`select timeslot ${day.dayFullName} the ${day.date} in ${day.month} between ${timeSlot} and ${endTime}`}
+                          ></button>
                         );
                       })}
                   </div>
@@ -151,7 +153,7 @@ const BookingSection = () => {
           );
 
           return (
-            <div
+            <button
               onClick={() => {
                 selectDateTimeForDateModule(selectedDate, timeSlot, endTime);
                 setIsBooked(checkBookings);
@@ -161,9 +163,10 @@ const BookingSection = () => {
                 checkBookings ? `booking-slot unavailable` : `booking-slot`
               }
               key={index}
+              aria-label={`Book timeslot between ${timeSlot} and ${endTime}`}
             >
               <p>{timeSlot}</p>
-            </div>
+            </button>
           );
         })
       )}

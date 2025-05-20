@@ -41,6 +41,8 @@
 
 .day-date-div {
   display: flex;
+  border: none;
+  background-color: white;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
@@ -75,6 +77,8 @@
 }
 
 .booking-slot {
+  border: none;
+  background-color: white;
   border-top: solid 2px black;
   flex: 1;
   width: 95%;
@@ -126,6 +130,8 @@
 }
 
 .tablet-timeslots-days {
+  border: none;
+  background-color: white;
   border-top: solid black 2px;
   width: 10%;
 }

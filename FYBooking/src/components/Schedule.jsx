@@ -62,8 +62,7 @@ const Schedule = () => {
     }
   }, [days]);
 
-  useEffect(() => {}, [days]);
-
+  const Tag = isTablet ? "div" : "button";
   return (
     <div className="upper-main-page">
       <div className="month-div">
@@ -82,7 +81,7 @@ const Schedule = () => {
       <div className="days-div">
         {days.length > 0 &&
           days.map((day, index) => (
-            <div
+            <Tag
               onClick={() => {
                 setSelectedDate((prev) => ({
                   ...prev,
@@ -98,10 +97,11 @@ const Schedule = () => {
                   : ""
               }`}
               key={index}
+              aria-label={`select ${day.dayFullName} the ${day.date} in ${day.month} `}
             >
               <p className="day-name-p">{day.dayName}</p>
               <p>{day.date}</p>
-            </div>
+            </Tag>
           ))}
       </div>
       <div className="week-div">
@@ -109,7 +109,11 @@ const Schedule = () => {
           className="week-btn"
           onClick={() => setWeekDays((days) => days - 7)}
         >
-          <img src="/Arrowback.svg" alt="arrow back" className="arrow-icon" />
+          <img
+            src="/Arrowback.svg"
+            alt="week arrow back"
+            className="arrow-icon"
+          />
         </button>
         <button
           style={{ borderBottom: "solid 2px black" }}
@@ -124,7 +128,7 @@ const Schedule = () => {
         >
           <img
             src="/Arrowforward.svg"
-            alt="arrow forward"
+            alt="week arrow forward"
             className="arrow-icon"
           />
         </button>
