@@ -88,7 +88,7 @@
 }
 
 .unavailable {
-  background-color: #ffb7b7;
+  background-color: #ffb7b7 !important;
 }
 
 .booking-slot:last-child {
