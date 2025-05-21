@@ -2,16 +2,19 @@
   display: flex;
   height: 30vh;
   justify-content: space-evenly;
+  width: 100%;
+  overflow-y: hidden;
 }
 
 .upper-main-page {
-  min-height: 25%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  width: 100%;
 }
 
 .lower-main-page {
+  padding-top: 1%;
   height: 70%;
   display: flex;
   flex-direction: column;
@@ -23,7 +26,7 @@
 }
 
 .month-h2 {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
   border-bottom: solid 2px black;
   display: inline-block;
@@ -46,13 +49,11 @@
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  padding: 10px;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding: 1%;
+  padding-top: 1%;
+  padding-bottom: 1%;
   border-bottom: solid 2px black;
-  font-size: larger;
-
-  font-weight: 500;
+  font-size: medium;
 }
 
 .day-name-p {
@@ -72,7 +73,7 @@
 .week-btn {
   border: none;
   background-color: white;
-  padding: 5px;
+  padding: 1%;
   font-size: larger;
 }
 
