@@ -30,6 +30,20 @@
   background-color: white;
 }
 
+.login-guest-btn {
+  display: flex;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  align-items: center;
+  border-radius: calc(15px + 1vw);
+  height: calc(30px + 2vw);
+  font-size: 18px;
+  width: 70%;
+  background-color: lightblue;
+}
+
 .wrong-login-info {
   text-align: center;
   padding: 20px;
@@ -77,14 +91,6 @@
   }
 
   .login-guest-btn {
-    display: flex;
-    margin: auto;
-    justify-content: center;
-    align-items: center;
-    border-radius: calc(15px + 1vw);
-    height: calc(30px + 2vw);
-    font-size: 18px;
     width: 27%;
-    background-color: lightblue;
   }
 }
